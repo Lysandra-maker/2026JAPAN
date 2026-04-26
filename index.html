@@ -6,6 +6,7 @@
     <title>靜如與怡伸的初夏紀行</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
+        /* 水彩風格與版面設計 */
         :root {
             --bg-paper: #FFFDF9;
             --paper-texture: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4eJFAAAAVFBMVEWxtrX////f39/v7+/Pz8/f39/v7+/f39/v7+/v7+/f39/f39/f39/v7+/f39/f39/v7+/f39/f39/v7+/f39/f39/v7+/f39/f39/v7+/f39/f39/f39/86z50AAAAEnRSTlMAAQIDBAUGBwgJCgsMDQ4QEb5fX/QAAAAzSURBVEjH7dKxCgAxCAPA0fT/f7thidR4uM5gI6O4G+K0Y0/7R69v4E76Rre+4E765mXfH13tAM8Z+3FMAAAAAElFTkSuQmCC');
@@ -101,6 +102,14 @@
         .section-title::before { content: ''; position: absolute; left: 0; top: 15%; height: 70%; width: 4px; background: var(--wc-accent); border-radius: 10px; }
         
         .booking-label { font-size: 0.85rem; color: var(--text-dark); margin: 15px 0 8px 5px; font-weight: 700; letter-spacing: 1px;}
+        
+        /* 歷史記帳清單樣式 */
+        .history-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed rgba(138, 188, 166, 0.3); }
+        .history-item:last-child { border-bottom: none; }
+        .history-info { display: flex; flex-direction: column; gap: 4px; }
+        .history-note { font-weight: 600; color: var(--text-dark); font-size: 0.95rem; }
+        .history-detail { font-size: 0.75rem; color: var(--text-light); }
+        .history-amount { font-family: 'Noto Serif TC', serif; font-weight: 900; color: var(--wc-primary); font-size: 1.1rem; }
     </style>
 </head>
 <body>
@@ -138,15 +147,9 @@
                 <div class="bp-notch notch-left"></div><div class="bp-notch notch-right"></div>
                 <div class="bp-header"><span>AirAsia X</span><span>D7 378</span></div>
                 <div class="bp-body">
-                    <div class="airport">
-                        <div class="airport-code">TPE</div>
-                        <div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">台北 (第一航廈)</div>
-                    </div>
+                    <div class="airport"><div class="airport-code">TPE</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">台北 (第一航廈)</div></div>
                     <div style="font-size: 1.4rem; color: rgba(173, 198, 217, 0.4); text-align:center;">✈️</div>
-                    <div class="airport">
-                        <div class="airport-code">KIX</div>
-                        <div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">大阪 (第一航廈)</div>
-                    </div>
+                    <div class="airport"><div class="airport-code">KIX</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">大阪 (第一航廈)</div></div>
                 </div>
                 <div class="bp-footer">
                     <div>DATE<br><span style="color:var(--text-dark); font-weight:600; font-size:0.95rem;">29 MAY</span></div>
@@ -160,15 +163,9 @@
                 <div class="bp-notch notch-left"></div><div class="bp-notch notch-right"></div>
                 <div class="bp-header" style="background: #D4B98E;"><span>AIRLINE TBD</span><span>待確認</span></div>
                 <div class="bp-body">
-                    <div class="airport">
-                        <div class="airport-code">KIX</div>
-                        <div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">大阪</div>
-                    </div>
+                    <div class="airport"><div class="airport-code">KIX</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">大阪</div></div>
                     <div style="font-size: 1.4rem; color: rgba(229, 195, 132, 0.4); text-align:center;">✈️</div>
-                    <div class="airport">
-                        <div class="airport-code">TPE</div>
-                        <div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">台北</div>
-                    </div>
+                    <div class="airport"><div class="airport-code">TPE</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">台北</div></div>
                 </div>
                 <div class="bp-footer">
                     <div>DATE<br><span style="color:var(--text-dark); font-weight:600; font-size:0.95rem;">03 JUN</span></div>
@@ -181,15 +178,9 @@
                 <div class="bp-notch notch-left"></div><div class="bp-notch notch-right"></div>
                 <div class="bp-header" style="background: #C98A6C;"><span>CHINA AIRLINES</span><span>CI 155</span></div>
                 <div class="bp-body">
-                    <div class="airport">
-                        <div class="airport-code">NGO</div>
-                        <div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">名古屋 (第一航廈)</div>
-                    </div>
+                    <div class="airport"><div class="airport-code">NGO</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">名古屋 (第一航廈)</div></div>
                     <div style="font-size: 1.4rem; color: rgba(201, 138, 108, 0.4); text-align:center;">✈️</div>
-                    <div class="airport">
-                        <div class="airport-code">TPE</div>
-                        <div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">台北 (第二航廈)</div>
-                    </div>
+                    <div class="airport"><div class="airport-code">TPE</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">台北 (第二航廈)</div></div>
                 </div>
                 <div class="bp-footer">
                     <div>DATE<br><span style="color:var(--text-dark); font-weight:600; font-size:0.95rem;">08 JUN</span></div>
@@ -199,58 +190,58 @@
             </div>
 
             <h2 class="serif" style="margin: 30px 0 10px 0; color: var(--text-dark);">住宿資訊</h2>
-
             <div class="section-card">
                 <h3 class="section-title">【京都】樂天 STAY URBAN 四條寺町</h3>
                 <div style="font-size: 0.85rem; line-height: 1.8; color: #5A6A61;">
-                    <b>入住日期：</b> 2026/05/29 (五) 15:00 起<br>
-                    <b>退房日期：</b> 2026/06/04 (四) 11:00 前<br>
-                    <b>住宿天數：</b> 共 6 晚<br>
-                    <b>聯絡電話：</b> +81 75-352-7725<br>
+                    <b>入住：</b> 2026/05/29 15:00 起<br><b>退房：</b> 2026/06/04 11:00 前<br><b>天數：</b> 共 6 晚<br><b>電話：</b> +81 75-352-7725<br>
                 </div>
             </div>
-
             <div class="section-card">
                 <h3 class="section-title">【名古屋】庫樂竹高級飯店名站南</h3>
                 <div style="font-size: 0.85rem; line-height: 1.8; color: #5A6A61;">
-                    <b>入住日期：</b> 2026/06/04 (四) 15:00 起<br>
-                    <b>退房日期：</b> 2026/06/08 (一) 10:00 前<br>
-                    <b>住宿天數：</b> 共 4 晚 (獨旅)<br>
-                    <b>聯絡電話：</b> +81 52-562-1211<br>
+                    <b>入住：</b> 2026/06/04 15:00 起<br><b>退房：</b> 2026/06/08 10:00 前<br><b>天數：</b> 共 4 晚 (獨旅)<br><b>電話：</b> +81 52-562-1211<br>
                 </div>
             </div>
         </div>
 
         <div id="page-expense" class="page">
             <h2 class="serif" style="margin-bottom: 20px; color: var(--text-dark);">旅行帳本</h2>
+            
             <div class="section-card" style="background: rgba(42, 58, 49, 0.85); color: white; border-radius: 15px 5px 15px 5px; box-shadow: 3px 3px 12px rgba(42, 58, 49, 0.2);">
                 <div style="font-size: 0.8rem; opacity: 0.8; letter-spacing:1px;">我們目前的總支出</div>
-                <div style="font-size: 2rem; font-family: 'Noto Serif TC'; margin: 5px 0; font-weight:900;">¥ 0</div>
-                <div style="font-size: 0.85rem; opacity: 0.8;">請從下方新增第一筆帳務</div>
+                <div id="total-jpy" style="font-size: 2rem; font-family: 'Noto Serif TC'; margin: 5px 0; font-weight:900;">¥ 0</div>
+                <div id="total-twd" style="font-size: 0.85rem; opacity: 0.8;">約台幣 0 元 (匯率約 0.21估算)</div>
             </div>
 
             <div class="section-card">
                 <h3 class="section-title">記入一筆新支出</h3>
                 <div class="input-group">
                     <label>消費金額 (¥ 日圓)</label>
-                    <input type="number" inputmode="numeric" placeholder="例如：1500" style="font-size: 1.2rem; font-weight: bold; color: var(--wc-secondary);">
+                    <input type="number" id="exp-amount" inputmode="numeric" placeholder="例如：1500" style="font-size: 1.2rem; font-weight: bold; color: var(--wc-secondary);">
                 </div>
                 <div class="input-group">
                     <label>項目說明</label>
-                    <input type="text" placeholder="例如：便利商店買點心">
+                    <input type="text" id="exp-note" placeholder="例如：便利商店買點心">
                 </div>
                 <div class="input-group">
                     <label>付款與分攤方式</label>
-                    <select style="margin-bottom: 10px; color: var(--text-dark);">
-                        <option>代墊人：靜如</option>
-                        <option>代墊人：怡伸</option>
+                    <select id="exp-payer" style="margin-bottom: 10px; color: var(--text-dark);">
+                        <option value="靜如">代墊人：靜如</option>
+                        <option value="怡伸">代墊人：怡伸</option>
                     </select>
                     <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between;">
-                        <span style="font-size:0.8rem; color:var(--text-light);">靜如 負擔:</span> <input type="number" inputmode="numeric" placeholder="金額" style="width: 38%; padding:10px;">
-                        <span style="font-size:0.8rem; color:var(--text-light);">怡伸 負擔:</span> <input type="number" inputmode="numeric" placeholder="金額" style="width: 38%; padding:10px;">
+                        <span style="font-size:0.8rem; color:var(--text-light);">靜如負擔:</span> <input type="number" id="exp-jingru" inputmode="numeric" placeholder="金額" style="width: 38%; padding:10px;">
+                        <span style="font-size:0.8rem; color:var(--text-light);">怡伸負擔:</span> <input type="number" id="exp-yishen" inputmode="numeric" placeholder="金額" style="width: 38%; padding:10px;">
                     </div>
                 </div>
-                <button class="btn-submit">存入帳本</button>
+                <button class="btn-submit" onclick="saveExpense()">存入帳本</button>
+            </div>
+
+            <div class="section-card">
+                <h3 class="section-title">歷史紀錄</h3>
+                <div id="expense-history-list">
+                    <div style="font-size:0.85rem; color:var(--text-light); text-align:center;">尚無紀錄</div>
+                </div>
             </div>
         </div>
 
@@ -265,10 +256,6 @@
                 <div class="todo-item" style="display: flex; align-items: center; margin-bottom: 15px;">
                     <input type="checkbox">
                     <div style="flex-grow: 1; font-size: 0.9rem;">買網卡/eSIM <span class="member-tag member-yishen">怡伸</span></div>
-                </div>
-                <div class="todo-item" style="display: flex; align-items: center; margin-bottom: 15px;">
-                    <input type="checkbox">
-                    <div style="flex-grow: 1; font-size: 0.9rem;">確認 6/3 回程機票 <span class="member-tag member-yishen">怡伸</span></div>
                 </div>
                 <div class="todo-item" style="display: flex; align-items: center;">
                     <input type="checkbox" checked>
@@ -294,11 +281,99 @@
         </div>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // 1. 綁定您的 Firebase 金鑰
+        const firebaseConfig = {
+            apiKey: "AIzaSyAzC3lUnUG7EyhKkcA096FywJ6A66Pnah4",
+            authDomain: "japan-e9eba.firebaseapp.com",
+            projectId: "japan-e9eba",
+            storageBucket: "japan-e9eba.firebasestorage.app",
+            messagingSenderId: "400670967338",
+            appId: "1:400670967338:web:bd11f6196d1aeaeb78a553"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 2. 儲存記帳資料到 Firebase 的函式
+        window.saveExpense = async function() {
+            const amount = document.getElementById('exp-amount').value;
+            const note = document.getElementById('exp-note').value;
+            const payer = document.getElementById('exp-payer').value;
+            const jingruSplit = document.getElementById('exp-jingru').value || 0;
+            const yishenSplit = document.getElementById('exp-yishen').value || 0;
+
+            // 基礎檢查：確認金額與項目有填寫
+            if(!amount || !note) {
+                alert("請填寫消費金額與項目說明喔！");
+                return;
+            }
+
+            try {
+                // 將資料寫入名為 "expenses" 的資料庫集合中
+                await addDoc(collection(db, "expenses"), { 
+                    amount: Number(amount), 
+                    note: note, 
+                    payer: payer, 
+                    jingru: Number(jingruSplit), 
+                    yishen: Number(yishenSplit), 
+                    createdAt: serverTimestamp() 
+                });
+                
+                // 儲存成功後，清空輸入框
+                document.getElementById('exp-amount').value = "";
+                document.getElementById('exp-note').value = "";
+                document.getElementById('exp-jingru').value = "";
+                document.getElementById('exp-yishen').value = "";
+                alert("記帳成功！");
+
+            } catch (error) {
+                console.error("儲存失敗：", error);
+                alert("儲存失敗，請檢查網路連線。");
+            }
+        };
+
+        // 3. 即時監聽資料庫變化 (同步計算總額 & 顯示清單)
+        const q = query(collection(db, "expenses"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            let totalAmount = 0;
+            let listHTML = "";
+
+            if (snapshot.empty) {
+                document.getElementById('expense-history-list').innerHTML = '<div style="font-size:0.85rem; color:var(--text-light); text-align:center;">尚無紀錄</div>';
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                totalAmount += data.amount;
+
+                // 組合歷史紀錄的 HTML 標籤
+                listHTML += `
+                <div class="history-item">
+                    <div class="history-info">
+                        <div class="history-note">${data.note}</div>
+                        <div class="history-detail">${data.payer} 代墊｜靜如負擔 ¥${data.jingru} / 怡伸負擔 ¥${data.yishen}</div>
+                    </div>
+                    <div class="history-amount">¥ ${data.amount}</div>
+                </div>`;
+            });
+
+            // 更新畫面上的總額與列表
+            document.getElementById('total-jpy').innerText = `¥ ${totalAmount.toLocaleString()}`;
+            document.getElementById('total-twd').innerText = `約台幣 ${Math.round(totalAmount * 0.21).toLocaleString()} 元 (匯率約 0.21估算)`;
+            document.getElementById('expense-history-list').innerHTML = listHTML;
+        });
+
+    </script>
+
     <script>
         const tripStart = new Date('2026-05-29');
         const tripEnd = new Date('2026-06-08');
 
-        // 1. 自動產生 5/29 到 6/8 的日期卡片
         function generateDateCards() {
             const scrollContainer = document.getElementById('dynamic-date-scroll');
             let current = new Date(tripStart);
@@ -307,7 +382,6 @@
             while (current <= tripEnd) {
                 const dateStr = `${current.getMonth() + 1}/${String(current.getDate()).padStart(2, '0')}`;
                 const dayName = days[current.getDay()];
-                // 預設選中 5/29
                 const isActive = (current.getTime() === tripStart.getTime()) ? 'active' : '';
 
                 const card = document.createElement('div');
@@ -322,26 +396,18 @@
             }
         }
 
-        // 2. 倒數計時
         function calculateCountdown() {
             const today = new Date();
             const diffTime = tripStart - today;
             const textElement = document.getElementById('countdown-timer');
-            
-            if (diffTime <= 0) {
-                textElement.innerText = "靜如與怡伸的小旅行，進行中！";
-            } else {
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                textElement.innerHTML = `距離啟程還有 <span style="font-size: 1.3rem; font-weight: 700; color:var(--wc-primary);">${diffDays}</span> 天`;
-            }
+            if (diffTime <= 0) { textElement.innerText = "靜如與怡伸的小旅行，進行中！"; } 
+            else { const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); textElement.innerHTML = `距離啟程還有 <span style="font-size: 1.3rem; font-weight: 700; color:var(--wc-primary);">${diffDays}</span> 天`; }
         }
 
-        // 3. 頁籤切換
         function switchTab(tabId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             const target = document.getElementById('page-' + tabId);
             if(target) target.classList.add('active');
-            
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             event.currentTarget.classList.add('active');
             window.scrollTo(0, 0);
