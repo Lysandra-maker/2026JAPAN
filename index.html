@@ -3,217 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2026 關西小旅｜日誌</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>京都・名古屋 ｜ 初夏紀行</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --mori-green: #8DA399; /* 森林綠 */
-            --mori-cream: #FAF9F6; /* 米白 */
-            --mori-brown: #765C48; /* 木質棕 */
-            --mori-sand: #E5D3B3;  /* 柔沙色 */
-            --text-color: #555555;
+            --bg-base: #F7F5F0;     /* 溫潤紙本底色 */
+            --primary-dark: #2C3E35; /* 深黛綠，用於標題 */
+            --accent-green: #7D9081; /* 森綠色 */
+            --accent-gold: #D4B98E;  /* 雅緻金 */
+            --text-main: #4A4A4A;
+            --text-light: #8E8E8E;
+            
+            /* 類別標籤顏色 */
+            --tag-spot: #7D9081;
+            --tag-food: #C98A6C;
+            --tag-trans: #6B8CAE;
+            --tag-hotel: #A38CA6;
         }
 
         body {
-            background-color: var(--mori-cream);
-            color: var(--text-color);
-            font-family: 'Noto Sans TC', sans-serif;
-            margin: 0; padding: 0 0 80px 0;
-            display: flex; flex-direction: column; align-items: center;
+            background-color: var(--bg-base); color: var(--text-main);
+            font-family: 'Noto Sans TC', sans-serif; margin: 0; padding: 0 0 90px 0;
+            overflow-x: hidden;
         }
 
-        /* 頂部裝飾 */
-        .top-banner {
-            width: 100%; height: 180px;
-            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1000&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: white; text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+        h1, h2, h3, .serif { font-family: 'Noto Serif TC', serif; }
+
+        /* 頂部儀式感 Header */
+        .hero {
+            padding: 50px 20px 30px;
+            background: linear-gradient(to bottom, #E8E5DC, var(--bg-base));
+            text-align: center;
+        }
+        .hero-title { font-size: 2rem; color: var(--primary-dark); font-weight: 600; margin: 0; letter-spacing: 4px; }
+        .hero-subtitle { font-size: 0.9rem; color: var(--accent-green); letter-spacing: 2px; margin-top: 10px; }
+        .countdown {
+            display: inline-block; margin-top: 20px; padding: 10px 25px;
+            border: 1px solid var(--accent-gold); border-radius: 30px;
+            font-size: 0.95rem; color: var(--primary-dark); font-weight: 500;
         }
 
-        .header-title { font-size: 1.6rem; letter-spacing: 2px; font-weight: 400; margin: 0; }
-        .weather-info { font-size: 0.9rem; margin-top: 8px; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; }
+        .container { padding: 0 20px; }
 
-        .container { width: 90%; max-width: 500px; margin-top: -20px; }
+        /* 隱藏/顯示分頁 */
+        .page { display: none; animation: fadeIn 0.4s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 卡片設計 */
-        .card {
-            background: white; border-radius: 18px; padding: 20px; margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(118, 92, 72, 0.08); border: 1px solid #f0efeb;
+        /* 橫向日期捲動 (Schedule) */
+        .date-scroll {
+            display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; margin-bottom: 20px;
+            scrollbar-width: none; /* Firefox */
+        }
+        .date-scroll::-webkit-scrollbar { display: none; } /* Chrome */
+        .date-card {
+            min-width: 60px; text-align: center; padding: 12px 10px;
+            border-radius: 15px; background: white; border: 1px solid #EBEBEB;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02); transition: 0.3s;
+        }
+        .date-card.active { background: var(--primary-dark); color: white; border: none; box-shadow: 0 6px 15px rgba(44,62,53,0.3); }
+        .date-card .day { font-size: 0.8rem; opacity: 0.8; margin-bottom: 4px; }
+        .date-card .date { font-size: 1.2rem; font-weight: 700; font-family: 'Noto Serif TC', serif; }
+
+        /* 每日天氣卡 */
+        .weather-card {
+            background: rgba(255,255,255,0.6); backdrop-filter: blur(5px);
+            border-radius: 12px; padding: 15px; display: flex; justify-content: space-between;
+            align-items: center; border: 1px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-bottom: 25px;
         }
 
-        h3 { color: var(--mori-green); font-size: 1.1rem; margin-top: 0; border-left: 4px solid var(--mori-green); padding-left: 10px; }
-
-        /* 按鈕設計 */
-        .btn {
-            background-color: var(--mori-green); color: white; border: none;
-            padding: 12px 20px; border-radius: 12px; width: 100%; cursor: pointer;
-            font-size: 1rem; transition: 0.3s; margin-top: 10px; display: block; text-align: center; text-decoration: none;
+        /* 質感時間軸 (Timeline) */
+        .timeline { position: relative; padding-left: 20px; margin-top: 10px; }
+        .timeline::before {
+            content: ''; position: absolute; left: 0; top: 10px; bottom: -20px;
+            width: 2px; background: #E2E2E2;
         }
-        .btn:active { transform: scale(0.98); background-color: #7a8f85; }
-        .btn-outline { background: transparent; color: var(--mori-green); border: 1.5px solid var(--mori-green); }
-
-        /* 表單元素 */
-        input, select, textarea {
-            width: 100%; padding: 12px; margin: 8px 0; border: 1px solid var(--mori-sand);
-            border-radius: 10px; box-sizing: border-box; color: var(--text-color); font-size: 1rem;
+        .time-item { position: relative; margin-bottom: 30px; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .time-item::before {
+            content: ''; position: absolute; left: -25px; top: 15px;
+            width: 12px; height: 12px; border-radius: 50%; background: var(--tag-spot);
+            border: 3px solid var(--bg-base); box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
         }
+        .time-item.food::before { background: var(--tag-food); }
+        .time-item.trans::before { background: var(--tag-trans); }
+        .time-item.hotel::before { background: var(--tag-hotel); }
+
+        .time-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+        .time-label { font-size: 0.85rem; font-weight: 600; color: var(--primary-dark); }
+        .tag { font-size: 0.7rem; padding: 3px 8px; border-radius: 10px; color: white; background: var(--tag-spot); }
+        .tag.food { background: var(--tag-food); }
+        .tag.trans { background: var(--tag-trans); }
+        .time-title { font-size: 1.1rem; font-weight: 500; margin: 0 0 5px 0; }
+        .time-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.5; }
+
+        /* 登機證設計 (Boarding Pass) */
+        .boarding-pass {
+            background: white; border-radius: 16px; position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06); margin-bottom: 25px; overflow: hidden;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+        }
+        .bp-header { background: var(--primary-dark); color: white; padding: 15px 20px; font-family: 'Noto Serif TC', serif; display: flex; justify-content: space-between; }
+        .bp-body { padding: 25px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #EAEAEA; }
+        .flight-code { font-size: 2rem; font-weight: 300; }
+        .airport { text-align: center; }
+        .airport-code { font-size: 2.2rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 5px; }
+        .bp-footer { padding: 15px 20px; display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-light); background: #FCFBFA; }
+        
+        /* 挖空半圓裝飾 */
+        .boarding-pass::before, .boarding-pass::after {
+            content: ''; position: absolute; top: calc(50% + 5px); width: 20px; height: 20px;
+            background: var(--bg-base); border-radius: 50%; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .boarding-pass::before { left: -10px; }
+        .boarding-pass::after { right: -10px; }
+
+        /* 表單與輸入框精緻化 */
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 0.85rem; color: var(--text-light); margin-bottom: 5px; }
+        input[type="number"], input[type="text"], select {
+            width: 100%; padding: 15px; border: 1px solid #E2E2E2; border-radius: 10px;
+            background: white; font-size: 1rem; box-sizing: border-box; font-family: inherit;
+        }
+        input:focus { outline: none; border-color: var(--accent-gold); }
 
         /* 導覽列 */
         .bottom-nav {
-            position: fixed; bottom: 15px; width: 90%; max-width: 400px;
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
-            display: flex; justify-content: space-around; padding: 12px 0;
-            border-radius: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px);
+            display: flex; justify-content: space-around; padding: 15px 0 25px 0;
+            border-top: 1px solid #F0F0F0; box-shadow: 0 -5px 20px rgba(0,0,0,0.02);
+            z-index: 1000;
         }
-        .nav-item { font-size: 0.8rem; color: #888; text-align: center; cursor: pointer; }
-        .nav-item.active { color: var(--mori-green); font-weight: 500; }
+        .nav-item {
+            text-align: center; color: var(--text-light); cursor: pointer;
+            font-size: 0.75rem; font-weight: 500; transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+        }
+        .nav-item.active { color: var(--primary-dark); }
+        .nav-icon { font-size: 1.4rem; }
 
-        /* 隱藏區塊 */
-        .page { display: none; }
-        .page.active { display: block; }
+        /* 通用區塊卡片 */
+        .section-card { background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .section-title { font-size: 1.1rem; color: var(--primary-dark); margin: 0 0 15px 0; border-left: 3px solid var(--accent-gold); padding-left: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="top-banner">
-        <h1 class="header-title" id="loc-title">森之漫遊</h1>
-        <div class="weather-info" id="weather-display">取得天氣中...</div>
+    <div class="hero">
+        <div class="hero-subtitle">2026 EARLY SUMMER</div>
+        <h1 class="hero-title">初夏紀行</h1>
+        <div class="countdown" id="countdown-timer">距離啟程計算中...</div>
     </div>
 
     <div class="container">
-        <div id="page-itinerary" class="page active">
-            <div class="card">
-                <h3>🗓️ 行程時間軸</h3>
-                <div id="itinerary-list" style="font-size: 0.95rem; line-height: 1.8;">
-                    尚未新增行程。
+        
+        <div id="page-schedule" class="page active">
+            <div class="date-scroll">
+                <div class="date-card active"><div class="day">Fri</div><div class="date">5/29</div></div>
+                <div class="date-card"><div class="day">Sat</div><div class="date">5/30</div></div>
+                <div class="date-card"><div class="day">Sun</div><div class="date">5/31</div></div>
+                <div class="date-card"><div class="day">Mon</div><div class="date">6/01</div></div>
+                <div class="date-card"><div class="day">Tue</div><div class="date">6/02</div></div>
+            </div>
+
+            <div class="weather-card">
+                <div>
+                    <div style="font-size: 0.85rem; color: var(--text-light);">京都 Kyoto</div>
+                    <div style="font-size: 1.2rem; font-weight: 500; margin-top: 2px;">晴時多雲 24°C</div>
                 </div>
-                <input type="text" id="plan-time" placeholder="時間 (如：09:00)">
-                <textarea id="plan-desc" placeholder="行程細節 (如：預約和服體驗)"></textarea>
-                <button class="btn" onclick="addPlan()">新增今日重點</button>
-                <a href="https://www.google.com/maps" id="map-btn" target="_blank" class="btn btn-outline">🗺️ 打開地圖導航</a>
+                <div style="font-size: 2rem;">⛅</div>
+            </div>
+
+            <div class="timeline">
+                <div class="time-item flight">
+                    <div class="time-header"><span class="time-label">08:35</span><span class="tag trans">交通</span></div>
+                    <h3 class="time-title">星宇航空 JX820</h3>
+                    <div class="time-desc">桃園機場 T1 出發，預計 12:15 抵達關西機場 T1。</div>
+                </div>
+                <div class="time-item">
+                    <div class="time-header"><span class="time-label">15:00</span><span class="tag">景點</span></div>
+                    <h3 class="time-title">清水寺周邊漫步</h3>
+                    <div class="time-desc">和服體驗預約已確認。從二年坂步行至清水寺。</div>
+                </div>
+                <div class="time-item food">
+                    <div class="time-header"><span class="time-label">18:30</span><span class="tag food">美食</span></div>
+                    <h3 class="time-title">先斗町 柚子元</h3>
+                    <div class="time-desc">晚餐：柚子火鍋。需出示預約憑證。</div>
+                </div>
             </div>
         </div>
 
-        <div id="page-finance" class="page">
-            <div class="card">
-                <h3>💰 記帳與分帳</h3>
-                <select id="currency">
-                    <option value="JPY">日圓 ¥</option>
-                    <option value="TWD">台幣 $</option>
-                </select>
-                <input type="number" id="exp-amount" placeholder="金額">
-                <input type="text" id="exp-note" placeholder="項目">
-                <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
-                    <span style="font-size: 0.85rem;">分攤 A:</span>
-                    <input type="number" id="split-a" value="50" style="width: 70px; margin: 0;">%
-                    <span style="font-size: 0.85rem;">B:</span>
-                    <input type="number" id="split-b" value="50" style="width: 70px; margin: 0;">%
+        <div id="page-bookings" class="page">
+            <h2 class="serif" style="margin-bottom: 20px;">預訂與憑證</h2>
+            
+            <div class="boarding-pass">
+                <div class="bp-header">
+                    <span>FLIGHT TICKET</span>
+                    <span>JX820</span>
                 </div>
-                <button class="btn" onclick="saveExpense()">儲存這筆紀錄</button>
+                <div class="bp-body">
+                    <div class="airport">
+                        <div class="airport-code">TPE</div>
+                        <div style="font-size: 0.8rem; color: var(--text-light);">Taipei</div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #DEDEDE;">✈️</div>
+                    <div class="airport">
+                        <div class="airport-code">KIX</div>
+                        <div style="font-size: 0.8rem; color: var(--text-light);">Osaka</div>
+                    </div>
+                </div>
+                <div class="bp-footer">
+                    <div>DATE<br><span style="color:var(--text-main); font-weight:600;">29 MAY 2026</span></div>
+                    <div>TIME<br><span style="color:var(--text-main); font-weight:600;">08:35</span></div>
+                </div>
             </div>
-            <div class="card">
-                <h3>📊 支出統計</h3>
-                <div id="expense-list" style="font-size: 0.9rem;">載入中...</div>
+
+            <div class="section-card">
+                <h3 class="section-title">住宿：京都格蘭貝爾飯店</h3>
+                <div style="font-size: 0.9rem; line-height: 1.8;">
+                    <b>Check-in：</b> 5/29 15:00<br>
+                    <b>Check-out：</b> 6/04 11:00<br>
+                    <b>地址：</b> 京都市東山区大和大路通四条下ル大和町27<br>
+                    <hr style="border: 0; border-top: 1px dashed #E2E2E2; margin: 15px 0;">
+                    <b>住宿總額：</b> ¥ 48,000<br>
+                    <b>分攤資訊：</b> 已於行前結清
+                </div>
             </div>
         </div>
 
-        <div id="page-files" class="page">
-            <div class="card">
-                <h3>📁 重要文件庫</h3>
-                <p style="font-size: 0.85rem; color: #888;">包含：電子機票、訂房憑證、保險單據</p>
-                <a href="https://drive.google.com/drive/folders/1i7hREjsVEpPNngJXHAGFOxzHCfvIQeMu?usp=sharing" target="_blank" class="btn">開啟 Google Drive 資料夾</a>
+        <div id="page-expense" class="page">
+            <h2 class="serif" style="margin-bottom: 20px;">帳務管理</h2>
+            
+            <div class="section-card" style="background: var(--primary-dark); color: white;">
+                <div style="font-size: 0.85rem; opacity: 0.8;">目前總支出</div>
+                <div style="font-size: 2.2rem; font-family: 'Noto Serif TC'; margin: 5px 0;">¥ 12,450</div>
+                <div style="font-size: 0.9rem; opacity: 0.8;">約合 TWD 2,614</div>
+            </div>
+
+            <div class="section-card">
+                <h3 class="section-title">新增一筆支出</h3>
+                <div class="input-group">
+                    <label>消費金額 (輸入數字)</label>
+                    <input type="number" inputmode="numeric" placeholder="例如：1500" style="font-size: 1.2rem; font-weight: bold;">
+                </div>
+                <div class="input-group">
+                    <label>項目說明</label>
+                    <input type="text" placeholder="例如：便利商店買水">
+                </div>
+                <div class="input-group">
+                    <label>付款人與分攤 (自行輸入金額)</label>
+                    <select style="margin-bottom: 10px;">
+                        <option>代墊人：A</option>
+                        <option>代墊人：B</option>
+                    </select>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <span>A 負擔:</span> <input type="number" inputmode="numeric" placeholder="金額">
+                        <span>B 負擔:</span> <input type="number" inputmode="numeric" placeholder="金額">
+                    </div>
+                </div>
+                <button style="width: 100%; background: var(--accent-gold); color: white; border: none; padding: 15px; border-radius: 10px; font-size: 1rem; cursor: pointer; font-weight: 500;">記入帳本</button>
             </div>
         </div>
+
+        <div id="page-planning" class="page">
+            <h2 class="serif" style="margin-bottom: 20px;">行前準備</h2>
+            <div class="section-card">
+                <h3 class="section-title">待辦事項清單</h3>
+                <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                    <input type="checkbox" style="width: 20px; height: 20px; margin-right: 15px; accent-color: var(--accent-green);">
+                    <div style="flex-grow: 1;">預約和服體驗 <span style="font-size: 0.75rem; background: #EEE; padding: 2px 6px; border-radius: 5px; margin-left: 5px;">共同</span></div>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                    <input type="checkbox" style="width: 20px; height: 20px; margin-right: 15px; accent-color: var(--accent-green);">
+                    <div style="flex-grow: 1;">買網卡/eSIM <span style="font-size: 0.75rem; background: #FFE0D1; color: #B35E30; padding: 2px 6px; border-radius: 5px; margin-left: 5px;">指派: B</span></div>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <input type="checkbox" style="width: 20px; height: 20px; margin-right: 15px; accent-color: var(--accent-green);" checked>
+                    <div style="flex-grow: 1; text-decoration: line-through; color: var(--text-light);">確認護照效期大於六個月</div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="showPage('itinerary')">📅 行程</div>
-        <div class="nav-item" onclick="showPage('finance')">💰 記帳</div>
-        <div class="nav-item" onclick="showPage('files')">🏨 檔案</div>
+        <div class="nav-item active" onclick="switchTab('schedule')">
+            <span class="nav-icon">🕰️</span><span>行程</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('bookings')">
+            <span class="nav-icon">🎟️</span><span>預訂</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('expense')">
+            <span class="nav-icon">🖋️</span><span>記帳</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('planning')">
+            <span class="nav-icon">🎒</span><span>準備</span>
+        </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        // Firebase 設定
-        const firebaseConfig = {
-            apiKey: "AIzaSyAzC3lUnUG7EyhKkcA096FywJ6A66Pnah4",
-            authDomain: "japan-e9eba.firebaseapp.com",
-            projectId: "japan-e9eba",
-            storageBucket: "japan-e9eba.firebasestorage.app",
-            messagingSenderId: "400670967338",
-            appId: "1:400670967338:web:bd11f6196d1aeaeb78a553"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // --- 介面控制 ---
-        window.showPage = function(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-' + pageId).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-        };
-
-        // --- 自動判斷地點與天氣 ---
-        function initTravelLogic() {
+    <script>
+        // 倒數計時邏輯
+        function calculateCountdown() {
             const today = new Date();
-            const locTitle = document.getElementById('loc-title');
-            const kyotoEnd = new Date('2026-06-04');
-            const tripEnd = new Date('2026-06-08');
-
-            let city = "京都";
-            if (today > kyotoEnd && today <= tripEnd) city = "名古屋";
-            if (today > tripEnd) city = "台灣";
-
-            locTitle.innerText = `${city}・旅誌`;
-            // 這裡模擬天氣，您以後可以串接真正的 API
-            document.getElementById('weather-display').innerText = `${city} 今日 24°C / 晴時多雲`;
+            const departureDate = new Date('2026-05-29T00:00:00');
+            const diffTime = Math.abs(departureDate - today);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+            
+            const textElement = document.getElementById('countdown-timer');
+            if (today >= departureDate) {
+                textElement.innerText = "旅途愉快，盡情探索！";
+            } else {
+                textElement.innerHTML = `距離啟程還有 <span style="font-size: 1.2rem; font-weight: 700;">${diffDays}</span> 天`;
+            }
         }
+        calculateCountdown();
 
-        // --- 行程功能 ---
-        window.addPlan = async function() {
-            const time = document.getElementById('plan-time').value;
-            const desc = document.getElementById('plan-desc').value;
-            if(!time || !desc) return alert("請填寫內容");
-            await addDoc(collection(db, "itinerary"), { time, desc, createdAt: serverTimestamp() });
-            document.getElementById('plan-time').value = "";
-            document.getElementById('plan-desc').value = "";
-        };
-
-        onSnapshot(query(collection(db, "itinerary"), orderBy("createdAt")), (snapshot) => {
-            const list = document.getElementById('itinerary-list');
-            list.innerHTML = snapshot.docs.map(doc => `<div><b>${doc.data().time}</b> ${doc.data().desc}</div>`).join('');
-        });
-
-        // --- 記帳功能 ---
-        window.saveExpense = async function() {
-            const amount = document.getElementById('exp-amount').value;
-            const note = document.getElementById('exp-note').value;
-            const cur = document.getElementById('currency').value;
-            const a = document.getElementById('split-a').value;
-            const b = document.getElementById('split-b').value;
-
-            if(!amount || !note) return alert("請填寫金額與項目");
-            await addDoc(collection(db, "expenses"), { amount, note, cur, a, b, createdAt: serverTimestamp() });
-            alert("儲存成功");
-        };
-
-        onSnapshot(query(collection(db, "expenses"), orderBy("createdAt", "desc")), (snapshot) => {
-            const list = document.getElementById('expense-list');
-            list.innerHTML = snapshot.docs.map(doc => {
-                const d = doc.data();
-                return `<div style="margin-bottom:8px; border-bottom:1px solid #eee; padding-bottom:4px;">
-                    [${d.cur}] ${d.amount} - ${d.note}<br>
-                    <small>分攤: A ${d.a}% / B ${d.b}%</small>
-                </div>`;
-            }).join('');
-        });
-
-        initTravelLogic();
+        // 頁籤切換邏輯
+        function switchTab(tabId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('page-' + tabId).classList.add('active');
+            
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            window.scrollTo(0, 0);
+        }
     </script>
 </body>
 </html>
