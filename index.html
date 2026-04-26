@@ -6,286 +6,192 @@
     <title>靜如與怡伸的初夏紀行</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
-        /* 水彩風格與版面設計 */
         :root {
             --bg-paper: #FFFDF9;
             --paper-texture: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4eJFAAAAVFBMVEWxtrX////f39/v7+/Pz8/f39/v7+/f39/v7+/v7+/f39/f39/f39/v7+/f39/f39/v7+/f39/f39/v7+/f39/f39/v7+/f39/f39/v7+/f39/f39/f39/86z50AAAAEnRSTlMAAQIDBAUGBwgJCgsMDQ4QEb5fX/QAAAAzSURBVEjH7dKxCgAxCAPA0fT/f7thidR4uM5gI6O4G+K0Y0/7R69v4E76Rre+4E765mXfH13tAM8Z+3FMAAAAAElFTkSuQmCC');
-            --wc-primary: #8ABCA6;
-            --wc-secondary: #ADC6D9;
-            --wc-accent: #E5C384;
-            --wc-peach: #F6D6C7;
-            --text-dark: #3A4A41;
-            --text-light: #7A8E81;
-            --tag-spot: rgba(138, 188, 166, 0.7);
-            --tag-food: rgba(222, 158, 125, 0.7);
-            --tag-trans: rgba(143, 183, 194, 0.7);
-            --tag-hotel: rgba(201, 169, 201, 0.7);
+            --wc-primary: #8ABCA6; --wc-secondary: #ADC6D9; --wc-accent: #E5C384; --wc-peach: #F6D6C7;
+            --text-dark: #3A4A41; --text-light: #7A8E81;
+            --tag-spot: rgba(138, 188, 166, 0.7); --tag-food: rgba(222, 158, 125, 0.7);
+            --tag-trans: rgba(143, 183, 194, 0.7); --tag-hotel: rgba(201, 169, 201, 0.7);
         }
 
-        body { background-color: var(--bg-paper); background-image: var(--paper-texture); color: var(--text-dark); font-family: 'Noto Sans TC', sans-serif; margin: 0; padding: 0 0 100px 0; overflow-x: hidden; }
+        body { background-color: var(--bg-paper); background-image: var(--paper-texture); color: var(--text-dark); font-family: 'Noto Sans TC', sans-serif; margin: 0; padding: 0 0 110px 0; overflow-x: hidden; }
         h1, h2, h3, .serif { font-family: 'Noto Serif TC', serif; font-weight: 600; }
-        b, strong { font-weight: 700; color: #2A3A31; }
-
-        .hero { padding: 50px 20px 40px; text-align: center; position: relative; }
-        .hero::before { content: ''; position: absolute; top: -30px; left: -10px; right: -10px; height: 180px; background: radial-gradient(circle at 30% 20%, var(--wc-secondary) 0%, rgba(255,255,255,0) 60%), radial-gradient(circle at 70% 30%, var(--wc-peach) 0%, rgba(255,255,255,0) 60%); opacity: 0.5; filter: blur(15px); z-index: -1; }
+        
+        .hero { padding: 40px 20px; text-align: center; position: relative; }
         .hero-title { font-size: 2.2rem; color: var(--text-dark); font-weight: 900; margin: 0; letter-spacing: 3px; position: relative; display: inline-block; }
         .hero-title::after { content: ''; position: absolute; bottom: -8px; left: 5%; width: 90%; height: 6px; background: var(--wc-accent); border-radius: 30px 10px; opacity: 0.7; }
-        .hero-subtitle { font-size: 0.85rem; color: var(--text-light); letter-spacing: 2px; margin-top: 15px; }
-        .countdown { display: inline-block; margin-top: 25px; padding: 10px 20px; background: white; border-radius: 20px 5px 20px 5px; border: 2px solid #FDF5E6; box-shadow: 2px 2px 0 #F0E6D2; font-size: 0.9rem; color: var(--text-dark); font-weight: 500; }
+        .countdown { display: inline-block; margin-top: 20px; padding: 8px 18px; background: white; border-radius: 20px 5px; border: 2px solid #FDF5E6; font-size: 0.85rem; color: var(--text-dark); box-shadow: 2px 2px 0 #F0E6D2; }
 
         .container { padding: 0 15px; }
-        .page { display: none; animation: fadeIn 0.5s ease; }
+        .page { display: none; animation: fadeIn 0.4s ease; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .date-scroll { display: flex; overflow-x: auto; gap: 12px; padding: 5px 5px 15px; margin-bottom: 15px; scrollbar-width: none; }
+        /* 日期捲動區 */
+        .date-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 5px 0 15px; margin-bottom: 10px; scrollbar-width: none; }
         .date-scroll::-webkit-scrollbar { display: none; }
-        .date-card { min-width: 58px; text-align: center; padding: 10px 8px; border-radius: 12px 12px 12px 5px; background: rgba(255,255,255,0.8); border: 2px solid white; box-shadow: 2px 2px 6px rgba(0,0,0,0.03); transition: 0.3s ease; }
-        .date-card.active { background: var(--wc-primary); color: white; border-color: rgba(255,255,255,0.5); box-shadow: 3px 3px 10px rgba(138, 188, 166, 0.4); }
-        .date-card .day { font-size: 0.75rem; opacity: 0.8; margin-bottom: 2px; }
-        .date-card .date { font-size: 1.15rem; font-weight: 700; font-family: 'Noto Serif TC', serif; }
+        .date-card { min-width: 55px; text-align: center; padding: 10px 5px; border-radius: 12px 12px 12px 5px; background: rgba(255,255,255,0.7); border: 2px solid white; box-shadow: 2px 2px 6px rgba(0,0,0,0.02); cursor: pointer; }
+        .date-card.active { background: var(--wc-primary); color: white; box-shadow: 3px 3px 10px rgba(138, 188, 166, 0.3); }
+        .date-card .day { font-size: 0.7rem; opacity: 0.8; }
+        .date-card .date { font-size: 1.1rem; font-weight: 700; }
 
-        .weather-card { background: rgba(255,255,255,0.5); border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; border: 2px solid white; position: relative; overflow: hidden; margin-bottom: 25px; box-shadow: 2px 2px 8px rgba(0,0,0,0.02); }
-        .weather-card::before { content: ''; position: absolute; left: -10%; top: -10%; width: 40%; height: 120%; background: radial-gradient(circle, var(--wc-accent) 0%, rgba(255,255,255,0) 80%); opacity: 0.3; filter: blur(8px); }
+        /* 內容卡片 */
+        .section-card { background: rgba(255,255,255,0.8); border-radius: 15px 5px 15px 5px; padding: 20px; margin-bottom: 20px; border: 1px solid white; box-shadow: 2px 2px 10px rgba(0,0,0,0.02); }
+        .section-title { font-size: 1.1rem; margin: 0 0 15px 0; border-left: 4px solid var(--wc-accent); padding-left: 10px; }
 
-        .timeline { position: relative; padding-left: 20px; margin-top: 10px; }
-        .timeline::before { content: ''; position: absolute; left: 0; top: 10px; bottom: -20px; width: 3px; background: rgba(226, 226, 226, 0.6); border-radius: 10px; }
-        .time-item { position: relative; margin-bottom: 30px; background: white; padding: 15px; border-radius: 12px 12px 12px 5px; box-shadow: 2px 2px 8px rgba(0,0,0,0.02); border: 1px solid #FAF7F0; }
-        .time-item::before { content: ''; position: absolute; left: -26px; top: 15px; width: 14px; height: 14px; border-radius: 50%; background: var(--tag-spot); border: 3px solid var(--bg-paper); box-shadow: 0 0 0 2px rgba(138, 188, 166, 0.2); }
-        .time-item.food::before { background: var(--tag-food); box-shadow: 0 0 0 2px rgba(222, 158, 125, 0.2); }
-        .time-item.trans::before { background: var(--tag-trans); box-shadow: 0 0 0 2px rgba(143, 183, 194, 0.2); }
-        .time-item.hotel::before { background: var(--tag-hotel); box-shadow: 0 0 0 2px rgba(201, 169, 201, 0.2); }
+        /* 時間軸 */
+        .timeline { position: relative; padding-left: 20px; border-left: 3px solid rgba(226, 226, 226, 0.6); margin-left: 10px; }
+        .time-item { position: relative; margin-bottom: 25px; background: white; padding: 15px; border-radius: 12px; border: 1px solid #FAF7F0; box-shadow: 2px 2px 5px rgba(0,0,0,0.01); }
+        .time-item::before { content: ''; position: absolute; left: -30px; top: 15px; width: 14px; height: 14px; border-radius: 50%; background: var(--wc-primary); border: 3px solid var(--bg-paper); }
+        .time-item .delete-btn { position: absolute; right: 10px; top: 10px; font-size: 0.8rem; color: #CCC; cursor: pointer; }
 
-        .time-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
-        .time-label { font-size: 0.85rem; font-weight: 600; color: var(--text-dark); }
-        .tag { font-size: 0.65rem; padding: 3px 8px; border-radius: 8px 3px; color: #4A5A51; background: var(--tag-spot); font-weight: 500; letter-spacing: 1px; }
-        .tag.food { background: var(--tag-food); }
-        .tag.trans { background: var(--tag-trans); }
-        .tag.hotel { background: var(--tag-hotel); }
-        .time-title { font-size: 1.1rem; font-weight: 500; margin: 0 0 5px 0; color: var(--text-dark); }
-        .time-desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; }
+        /* 憑證票券 */
+        .boarding-pass { background: white; border-radius: 16px; margin-bottom: 25px; border: 2px solid rgba(173, 198, 217, 0.1); overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .bp-header { background: var(--wc-secondary); color: white; padding: 10px 20px; font-size: 0.85rem; display: flex; justify-content: space-between; }
+        .bp-body { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #EEE; }
+        .bp-footer { padding: 12px 20px; background: #FBFCFD; display: flex; justify-content: space-between; font-size: 0.8rem; }
+        .drive-btn { display: block; width: 100%; text-align: center; padding: 12px 0; background: #F0F4F7; color: var(--wc-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 700; border-top: 1px solid #EEE; }
 
-        .boarding-pass { background: white; border-radius: 16px; position: relative; box-shadow: 0 8px 25px rgba(173, 198, 217, 0.2); margin-bottom: 25px; overflow: hidden; border: 2px solid rgba(173, 198, 217, 0.1); }
-        .boarding-pass::before { content: ''; position: absolute; bottom: -20%; right: -10%; width: 50%; height: 80%; background: radial-gradient(circle, var(--wc-peach) 0%, rgba(255,255,255,0) 70%); opacity: 0.4; filter: blur(10px); z-index: 0; }
-        .bp-header { background: var(--wc-secondary); color: white; padding: 12px 20px; font-family: 'Noto Serif TC', serif; display: flex; justify-content: space-between; position: relative; z-index: 1; letter-spacing: 1px; font-size: 0.9rem;}
-        .bp-body { padding: 20px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed rgba(173, 198, 217, 0.2); position: relative; z-index: 1; }
-        .airport-code { font-size: 2rem; font-weight: 700; color: var(--wc-secondary); margin-bottom: 5px; font-family: 'Noto Sans TC', sans-serif; }
-        .bp-footer { padding: 12px 20px; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-light); background: rgba(173, 198, 217, 0.05); position: relative; z-index: 1; }
-        .bp-notch { position: absolute; width: 18px; height: 18px; background: var(--bg-paper); border-radius: 50%; top: calc(50% + 15px); z-index: 2; border: 2px solid rgba(173, 198, 217, 0.1); }
-        .notch-left { left: -9px; }
-        .notch-right { right: -9px; }
-
-        .input-group { margin-bottom: 18px; }
-        .input-group label { display: block; font-size: 0.8rem; color: var(--text-light); margin-bottom: 6px; padding-left: 5px; }
-        input[type="number"], input[type="text"], select { width: 100%; padding: 14px 15px; border: 2px solid #FDF5E6; border-radius: 12px 5px 10px 5px; background: white; font-size: 1rem; box-sizing: border-box; font-family: inherit; color: var(--text-dark); box-shadow: inset 1px 1px 4px rgba(0,0,0,0.01); transition: 0.3s; }
-        input:focus { outline: none; border-color: var(--wc-accent); box-shadow: inset 1px 1px 4px rgba(0,0,0,0.01), 0 0 8px rgba(229, 195, 132, 0.2); }
-        .btn-submit { width: 100%; background: var(--wc-primary); color: white; border: none; padding: 15px; border-radius: 12px 5px 12px 5px; font-size: 1rem; cursor: pointer; font-weight: 500; box-shadow: 2px 2px 0 #6C9E86; transition: 0.2s; letter-spacing: 2px; }
-        .btn-submit:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 #6C9E86; }
-
-        .bottom-nav { position: fixed; bottom: 15px; left: 5%; width: 90%; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-radius: 20px; border: 2px solid white; box-shadow: 0 8px 30px rgba(118, 92, 72, 0.1); z-index: 1000; }
-        .nav-item { text-align: center; color: var(--text-light); cursor: pointer; font-size: 0.7rem; font-weight: 500; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .nav-item.active { color: var(--wc-primary); transform: scale(1.05); }
-        .nav-icon { font-size: 1.3rem; opacity: 0.7; transition: 0.3s; }
-        .nav-item.active .nav-icon { opacity: 1; }
-
-        .todo-item input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border: 2px solid rgba(138, 188, 166, 0.4); border-radius: 6px; margin-right: 15px; background: white; position: relative; cursor: pointer; transition: 0.2s; }
-        .todo-item input[type="checkbox"]:checked { background: var(--wc-primary); border-color: rgba(255,255,255,0.1); }
-        .todo-item input[type="checkbox"]:checked::after { content: '✓'; position: absolute; color: white; font-size: 16px; font-weight: bold; top: -1px; left: 3px; }
-
-        .member-tag { font-size: 0.7rem; padding: 3px 7px; border-radius: 8px 3px; margin-left: 6px; font-weight: 500; }
-        .member-common { background: rgba(138, 188, 166, 0.15); color: #4A6A51; }
-        .member-yishen { background: rgba(173, 198, 217, 0.15); color: #4A5A6A; }
-        .member-jingru { background: rgba(246, 214, 199, 0.15); color: #6A4A5A; }
-
-        .section-card { background: rgba(255,255,255,0.8); border-radius: 12px 12px 12px 5px; padding: 20px; margin-bottom: 20px; border: 1px solid white; box-shadow: 2px 2px 8px rgba(0,0,0,0.02); }
-        .section-title { font-size: 1.1rem; color: var(--text-dark); margin: 0 0 15px 0; position: relative; padding-left: 10px; }
-        .section-title::before { content: ''; position: absolute; left: 0; top: 15%; height: 70%; width: 4px; background: var(--wc-accent); border-radius: 10px; }
+        /* 輸入框與按鈕 */
+        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #FDF5E6; border-radius: 10px; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; }
+        .btn-add { background: var(--wc-primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; }
         
-        .booking-label { font-size: 0.85rem; color: var(--text-dark); margin: 15px 0 8px 5px; font-weight: 700; letter-spacing: 1px;}
-        
-        /* 歷史記帳清單樣式 */
-        .history-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed rgba(138, 188, 166, 0.3); }
-        .history-item:last-child { border-bottom: none; }
-        .history-info { display: flex; flex-direction: column; gap: 4px; }
-        .history-note { font-weight: 600; color: var(--text-dark); font-size: 0.95rem; }
-        .history-detail { font-size: 0.75rem; color: var(--text-light); }
-        .history-amount { font-family: 'Noto Serif TC', serif; font-weight: 900; color: var(--wc-primary); font-size: 1.1rem; }
+        /* 導覽列 */
+        .bottom-nav { position: fixed; bottom: 15px; left: 5%; width: 90%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); z-index: 2000; border: 1px solid white; }
+        .nav-item { font-size: 0.7rem; color: var(--text-light); text-align: center; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
+        .nav-item.active { color: var(--wc-primary); font-weight: 700; transform: scale(1.1); }
+        .nav-icon { font-size: 1.3rem; }
+
+        /* 清單 */
+        .todo-item { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.9rem; }
+        .todo-checkbox { width: 22px; height: 22px; margin-right: 12px; accent-color: var(--wc-primary); }
+        .done { text-decoration: line-through; color: #AAA; }
     </style>
 </head>
 <body>
 
     <div class="hero">
-        <div class="hero-subtitle">KYOTO ｜ NAGOYA 2026 SUMMER</div>
         <h1 class="hero-title">初夏紀行</h1>
-        <div class="countdown" id="countdown-timer">計算中...</div>
+        <div class="hero-subtitle" style="font-size: 0.8rem; color: var(--text-light); margin-top: 10px;">靜如 & 怡伸的日本手帳</div>
+        <div class="countdown" id="countdown-timer">載入中...</div>
     </div>
 
     <div class="container">
-        
         <div id="page-schedule" class="page active">
-            <div class="date-scroll" id="dynamic-date-scroll"></div>
-            <div class="weather-card">
-                <div>
-                    <div id="display-city" style="font-size: 0.8rem; color: var(--text-light);">京都 Kyoto</div>
-                    <div id="display-weather" style="font-size: 1.15rem; font-weight: 500; margin-top: 3px; color: var(--text-dark);">晴時多雲 24°C</div>
-                </div>
-                <div style="font-size: 2rem; position: relative; z-index: 1;">⛅</div>
-            </div>
+            <div class="date-scroll" id="date-bar"></div>
+            <div id="current-day-label" style="font-family: serif; font-size: 1.2rem; color: var(--wc-primary); margin-bottom: 15px; font-weight: 900;"></div>
+            
             <div class="timeline" id="itinerary-list">
-                <div class="time-item">
-                    <h3 class="time-title">載入中...</h3>
-                    <div class="time-desc">準備開啟靜如與怡伸的專屬手帳。</div>
                 </div>
+
+            <div class="section-card" style="margin-top: 30px; background: rgba(255,255,255,0.5);">
+                <h3 class="section-title">新增今日行程</h3>
+                <input type="text" id="sched-time" placeholder="時間 (如 09:30)">
+                <input type="text" id="sched-title" placeholder="景點/活動名稱">
+                <select id="sched-type">
+                    <option value="spot">景點</option>
+                    <option value="food">美食</option>
+                    <option value="trans">交通</option>
+                    <option value="hotel">住宿</option>
+                </select>
+                <button class="btn-add" onclick="addSchedule()">加入時間軸</button>
             </div>
         </div>
 
         <div id="page-bookings" class="page">
-            <h2 class="serif" style="margin-bottom: 10px; color: var(--text-dark);">航班資訊</h2>
+            <h2 class="serif">雲端憑證庫</h2>
             
-            <div class="booking-label">✈️ 【共同去程】飛往關西</div>
+            <div style="font-size: 0.85rem; font-weight: 700; margin: 15px 0 10px 5px;">✈️ 航班資訊</div>
             <div class="boarding-pass">
-                <div class="bp-notch notch-left"></div><div class="bp-notch notch-right"></div>
-                <div class="bp-header"><span>AirAsia X</span><span>D7 378</span></div>
+                <div class="bp-header"><span>5/29 共同去程</span><span>AirAsia D7 378</span></div>
                 <div class="bp-body">
-                    <div class="airport"><div class="airport-code">TPE</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">台北 (第一航廈)</div></div>
-                    <div style="font-size: 1.4rem; color: rgba(173, 198, 217, 0.4); text-align:center;">✈️</div>
-                    <div class="airport"><div class="airport-code">KIX</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">大阪 (第一航廈)</div></div>
+                    <div><b>TPE</b><div style="font-size: 0.7rem;">台北 15:40</div></div>
+                    <div style="font-size: 1.2rem; opacity: 0.3;">✈️</div>
+                    <div><b>KIX</b><div style="font-size: 0.7rem;">大阪 19:30</div></div>
                 </div>
-                <div class="bp-footer">
-                    <div>DATE<br><span style="color:var(--text-dark); font-weight:600; font-size:0.95rem;">29 MAY</span></div>
-                    <div>DEP<br><span style="color:var(--text-dark); font-weight:600; font-size:0.95rem;">15:40</span></div>
-                    <div>ARR<br><span style="color:var(--text-dark); font-weight:600; font-size:0.95rem;">19:30</span></div>
-                </div>
+                <a href="https://drive.google.com/drive/folders/1i7hREjsVEpPNngJXHAGFOxzHCfvIQeMu" target="_blank" class="drive-btn">📂 開啟電子機票 PDF</a>
             </div>
 
-            <div class="booking-label">✈️ 【提前回程】怡伸 (待確認)</div>
-            <div class="boarding-pass" style="opacity: 0.85;">
-                <div class="bp-notch notch-left"></div><div class="bp-notch notch-right"></div>
-                <div class="bp-header" style="background: #D4B98E;"><span>AIRLINE TBD</span><span>待確認</span></div>
-                <div class="bp-body">
-                    <div class="airport"><div class="airport-code">KIX</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">大阪</div></div>
-                    <div style="font-size: 1.4rem; color: rgba(229, 195, 132, 0.4); text-align:center;">✈️</div>
-                    <div class="airport"><div class="airport-code">TPE</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">台北</div></div>
-                </div>
-                <div class="bp-footer">
-                    <div>DATE<br><span style="color:var(--text-dark); font-weight:600; font-size:0.95rem;">03 JUN</span></div>
-                    <div>TIME<br><span style="color:var(--text-dark); font-weight:600; font-size:0.95rem;">-- : --</span></div>
-                </div>
-            </div>
-
-            <div class="booking-label">✈️ 【獨旅回程】靜如</div>
             <div class="boarding-pass">
-                <div class="bp-notch notch-left"></div><div class="bp-notch notch-right"></div>
-                <div class="bp-header" style="background: #C98A6C;"><span>CHINA AIRLINES</span><span>CI 155</span></div>
+                <div class="bp-header" style="background: var(--wc-accent);"><span>6/03 怡伸回程</span><span>待確認</span></div>
                 <div class="bp-body">
-                    <div class="airport"><div class="airport-code">NGO</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">名古屋 (第一航廈)</div></div>
-                    <div style="font-size: 1.4rem; color: rgba(201, 138, 108, 0.4); text-align:center;">✈️</div>
-                    <div class="airport"><div class="airport-code">TPE</div><div style="font-size: 0.75rem; color: var(--text-light); text-align:center;">台北 (第二航廈)</div></div>
+                    <div><b>KIX</b><div style="font-size: 0.7rem;">大阪</div></div>
+                    <div style="font-size: 1.2rem; opacity: 0.3;">✈️</div>
+                    <div><b>TPE</b><div style="font-size: 0.7rem;">台北</div></div>
                 </div>
-                <div class="bp-footer">
-                    <div>DATE<br><span style="color:var(--text-dark); font-weight:600; font-size:0.95rem;">08 JUN</span></div>
-                    <div>DEP<br><span style="color:var(--text-dark); font-weight:600; font-size:0.95rem;">12:20</span></div>
-                    <div>ARR<br><span style="color:var(--text-dark); font-weight:600; font-size:0.95rem;">14:30</span></div>
-                </div>
+                <a href="https://drive.google.com/drive/folders/1i7hREjsVEpPNngJXHAGFOxzHCfvIQeMu" target="_blank" class="drive-btn">📂 查看回程憑證</a>
             </div>
 
-            <h2 class="serif" style="margin: 30px 0 10px 0; color: var(--text-dark);">住宿資訊</h2>
+            <div class="boarding-pass">
+                <div class="bp-header" style="background: #C98A6C;"><span>6/08 靜如回程</span><span>CI 155</span></div>
+                <div class="bp-body">
+                    <div><b>NGO</b><div style="font-size: 0.7rem;">名古屋 12:20</div></div>
+                    <div style="font-size: 1.2rem; opacity: 0.3;">✈️</div>
+                    <div><b>TPE</b><div style="font-size: 0.7rem;">台北 14:30</div></div>
+                </div>
+                <a href="https://drive.google.com/drive/folders/1i7hREjsVEpPNngJXHAGFOxzHCfvIQeMu" target="_blank" class="drive-btn">📂 開啟電子機票 PDF</a>
+            </div>
+
+            <div style="font-size: 0.85rem; font-weight: 700; margin: 25px 0 10px 5px;">🏨 住宿資訊</div>
             <div class="section-card">
-                <h3 class="section-title">【京都】樂天 STAY URBAN 四條寺町</h3>
-                <div style="font-size: 0.85rem; line-height: 1.8; color: #5A6A61;">
-                    <b>入住：</b> 2026/05/29 15:00 起<br><b>退房：</b> 2026/06/04 11:00 前<br><b>天數：</b> 共 6 晚<br><b>電話：</b> +81 75-352-7725<br>
+                <h3 class="section-title">京都：樂天 STAY URBAN</h3>
+                <div style="font-size: 0.85rem; line-height: 1.6;">
+                    5/29 - 6/04 (6晚)<br>電話：+81 75-352-7725
                 </div>
+                <a href="https://drive.google.com/drive/folders/1i7hREjsVEpPNngJXHAGFOxzHCfvIQeMu" target="_blank" class="drive-btn" style="margin-top: 15px; border-radius: 8px; border: 1px solid #EEE;">📂 開啟訂房憑證</a>
             </div>
             <div class="section-card">
-                <h3 class="section-title">【名古屋】庫樂竹高級飯店名站南</h3>
-                <div style="font-size: 0.85rem; line-height: 1.8; color: #5A6A61;">
-                    <b>入住：</b> 2026/06/04 15:00 起<br><b>退房：</b> 2026/06/08 10:00 前<br><b>天數：</b> 共 4 晚 (獨旅)<br><b>電話：</b> +81 52-562-1211<br>
+                <h3 class="section-title">名古屋：庫樂竹高級飯店</h3>
+                <div style="font-size: 0.85rem; line-height: 1.6;">
+                    6/04 - 6/08 (4晚)<br>電話：+81 52-562-1211
                 </div>
+                <a href="https://drive.google.com/drive/folders/1i7hREjsVEpPNngJXHAGFOxzHCfvIQeMu" target="_blank" class="drive-btn" style="margin-top: 15px; border-radius: 8px; border: 1px solid #EEE;">📂 開啟訂房憑證</a>
             </div>
         </div>
 
         <div id="page-expense" class="page">
-            <h2 class="serif" style="margin-bottom: 20px; color: var(--text-dark);">旅行帳本</h2>
-            
-            <div class="section-card" style="background: rgba(42, 58, 49, 0.85); color: white; border-radius: 15px 5px 15px 5px; box-shadow: 3px 3px 12px rgba(42, 58, 49, 0.2);">
-                <div style="font-size: 0.8rem; opacity: 0.8; letter-spacing:1px;">我們目前的總支出</div>
-                <div id="total-jpy" style="font-size: 2rem; font-family: 'Noto Serif TC'; margin: 5px 0; font-weight:900;">¥ 0</div>
-                <div id="total-twd" style="font-size: 0.85rem; opacity: 0.8;">約台幣 0 元 (匯率約 0.21估算)</div>
+            <h2 class="serif">旅行帳本</h2>
+            <div class="section-card" style="background: var(--text-dark); color: white;">
+                <div style="font-size: 0.8rem; opacity: 0.8;">總計支出</div>
+                <div id="total-val" style="font-size: 2rem; font-family: serif; font-weight: 900;">¥ 0</div>
+                <div id="twd-val" style="font-size: 0.85rem; opacity: 0.7;">約台幣 0 元</div>
             </div>
-
             <div class="section-card">
-                <h3 class="section-title">記入一筆新支出</h3>
-                <div class="input-group">
-                    <label>消費金額 (¥ 日圓)</label>
-                    <input type="number" id="exp-amount" inputmode="numeric" placeholder="例如：1500" style="font-size: 1.2rem; font-weight: bold; color: var(--wc-secondary);">
+                <input type="number" id="exp-amt" placeholder="金額 (¥)">
+                <input type="text" id="exp-item" placeholder="項目說明">
+                <div style="display: flex; gap: 10px;">
+                    <input type="number" id="exp-j" placeholder="靜如付">
+                    <input type="number" id="exp-y" placeholder="怡伸付">
                 </div>
-                <div class="input-group">
-                    <label>項目說明</label>
-                    <input type="text" id="exp-note" placeholder="例如：便利商店買點心">
-                </div>
-                <div class="input-group">
-                    <label>付款與分攤方式</label>
-                    <select id="exp-payer" style="margin-bottom: 10px; color: var(--text-dark);">
-                        <option value="靜如">代墊人：靜如</option>
-                        <option value="怡伸">代墊人：怡伸</option>
-                    </select>
-                    <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between;">
-                        <span style="font-size:0.8rem; color:var(--text-light);">靜如負擔:</span> <input type="number" id="exp-jingru" inputmode="numeric" placeholder="金額" style="width: 38%; padding:10px;">
-                        <span style="font-size:0.8rem; color:var(--text-light);">怡伸負擔:</span> <input type="number" id="exp-yishen" inputmode="numeric" placeholder="金額" style="width: 38%; padding:10px;">
-                    </div>
-                </div>
-                <button class="btn-submit" onclick="saveExpense()">存入帳本</button>
+                <button class="btn-add" onclick="saveExpense()">記入帳本</button>
             </div>
-
-            <div class="section-card">
-                <h3 class="section-title">歷史紀錄</h3>
-                <div id="expense-history-list">
-                    <div style="font-size:0.85rem; color:var(--text-light); text-align:center;">尚無紀錄</div>
-                </div>
-            </div>
+            <div id="exp-list"></div>
         </div>
 
         <div id="page-planning" class="page">
-            <h2 class="serif" style="margin-bottom: 20px; color: var(--text-dark);">行前清單</h2>
+            <h2 class="serif">行前準備</h2>
             <div class="section-card">
-                <h3 class="section-title">待辦事項清單</h3>
-                <div class="todo-item" style="display: flex; align-items: center; margin-bottom: 15px;">
-                    <input type="checkbox">
-                    <div style="flex-grow: 1; font-size: 0.9rem;">預約和服體驗 <span class="member-tag member-common">共同</span></div>
-                </div>
-                <div class="todo-item" style="display: flex; align-items: center; margin-bottom: 15px;">
-                    <input type="checkbox">
-                    <div style="flex-grow: 1; font-size: 0.9rem;">買網卡/eSIM <span class="member-tag member-yishen">怡伸</span></div>
-                </div>
-                <div class="todo-item" style="display: flex; align-items: center;">
-                    <input type="checkbox" checked>
-                    <div style="flex-grow: 1; text-decoration: line-through; color: var(--text-light); font-size: 0.9rem;">確認護照效期</div>
+                <div id="todo-list"></div>
+                <div style="margin-top: 20px; border-top: 1px dashed #EEE; padding-top: 15px;">
+                    <input type="text" id="todo-input" placeholder="新增待辦事項...">
+                    <button class="btn-add" style="background: var(--wc-accent);" onclick="addTodo()">加入清單</button>
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('schedule')">
-            <span class="nav-icon">🗺️</span><span>行程手帳</span>
-        </div>
-        <div class="nav-item" onclick="switchTab('bookings')">
-            <span class="nav-icon">🎟️</span><span>憑證</span>
-        </div>
-        <div class="nav-item" onclick="switchTab('expense')">
-            <span class="nav-icon">🖊️</span><span>帳本</span>
-        </div>
-        <div class="nav-item" onclick="switchTab('planning')">
-            <span class="nav-icon">🎒</span><span>準備</span>
-        </div>
+        <div class="nav-item active" onclick="switchTab('schedule')"><span class="nav-icon">🗺️</span><span>行程</span></div>
+        <div class="nav-item" onclick="switchTab('bookings')"><span class="nav-icon">🎟️</span><span>憑證</span></div>
+        <div class="nav-item" onclick="switchTab('expense')"><span class="nav-icon">🖊️</span><span>帳本</span></div>
+        <div class="nav-item" onclick="switchTab('planning')"><span class="nav-icon">🎒</span><span>準備</span></div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, where, serverTimestamp, updateDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // 1. 綁定您的 Firebase 金鑰
         const firebaseConfig = {
             apiKey: "AIzaSyAzC3lUnUG7EyhKkcA096FywJ6A66Pnah4",
             authDomain: "japan-e9eba.firebaseapp.com",
@@ -298,125 +204,118 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 2. 儲存記帳資料到 Firebase 的函式
-        window.saveExpense = async function() {
-            const amount = document.getElementById('exp-amount').value;
-            const note = document.getElementById('exp-note').value;
-            const payer = document.getElementById('exp-payer').value;
-            const jingruSplit = document.getElementById('exp-jingru').value || 0;
-            const yishenSplit = document.getElementById('exp-yishen').value || 0;
+        let selectedDate = "5/29"; // 預設首日
 
-            // 基礎檢查：確認金額與項目有填寫
-            if(!amount || !note) {
-                alert("請填寫消費金額與項目說明喔！");
-                return;
-            }
-
-            try {
-                // 將資料寫入名為 "expenses" 的資料庫集合中
-                await addDoc(collection(db, "expenses"), { 
-                    amount: Number(amount), 
-                    note: note, 
-                    payer: payer, 
-                    jingru: Number(jingruSplit), 
-                    yishen: Number(yishenSplit), 
-                    createdAt: serverTimestamp() 
-                });
-                
-                // 儲存成功後，清空輸入框
-                document.getElementById('exp-amount').value = "";
-                document.getElementById('exp-note').value = "";
-                document.getElementById('exp-jingru').value = "";
-                document.getElementById('exp-yishen').value = "";
-                alert("記帳成功！");
-
-            } catch (error) {
-                console.error("儲存失敗：", error);
-                alert("儲存失敗，請檢查網路連線。");
-            }
+        // --- 行程功能 ---
+        window.addSchedule = async () => {
+            const time = document.getElementById('sched-time').value;
+            const title = document.getElementById('sched-title').value;
+            const type = document.getElementById('sched-type').value;
+            if(!time || !title) return;
+            await addDoc(collection(db, "schedules"), { date: selectedDate, time, title, type, createdAt: serverTimestamp() });
+            document.getElementById('sched-time').value = ""; document.getElementById('sched-title').value = "";
         };
 
-        // 3. 即時監聽資料庫變化 (同步計算總額 & 顯示清單)
-        const q = query(collection(db, "expenses"), orderBy("createdAt", "desc"));
-        onSnapshot(q, (snapshot) => {
-            let totalAmount = 0;
-            let listHTML = "";
+        window.loadSchedule = (date) => {
+            selectedDate = date;
+            document.getElementById('current-day-label').innerText = `2026. ${date} 行程`;
+            const qS = query(collection(db, "schedules"), where("date", "==", date), orderBy("time"));
+            onSnapshot(qS, (snap) => {
+                let html = "";
+                snap.forEach(d => {
+                    const s = d.data();
+                    html += `<div class="time-item ${s.type}">
+                        <div class="delete-btn" onclick="deleteItem('schedules','${d.id}')">✕</div>
+                        <div class="time-label">${s.time}</div>
+                        <div class="time-title">${s.title}</div>
+                    </div>`;
+                });
+                document.getElementById('itinerary-list').innerHTML = html || "<p style='color:#AAA; font-size:0.8rem;'>今天還沒有安排行程呢...</p>";
+            });
+        };
 
-            if (snapshot.empty) {
-                document.getElementById('expense-history-list').innerHTML = '<div style="font-size:0.85rem; color:var(--text-light); text-align:center;">尚無紀錄</div>';
-                return;
-            }
+        // --- 記帳功能 ---
+        window.saveExpense = async () => {
+            const amt = document.getElementById('exp-amt').value;
+            const item = document.getElementById('exp-item').value;
+            const j = document.getElementById('exp-j').value || 0;
+            const y = document.getElementById('exp-y').value || 0;
+            if(!amt || !item) return;
+            await addDoc(collection(db, "expenses"), { amount: Number(amt), item, jingru: Number(j), yishen: Number(y), createdAt: serverTimestamp() });
+            document.getElementById('exp-amt').value = ""; document.getElementById('exp-item').value = "";
+            document.getElementById('exp-j').value = ""; document.getElementById('exp-y').value = "";
+        };
 
-            snapshot.forEach((doc) => {
-                const data = doc.data();
-                totalAmount += data.amount;
-
-                // 組合歷史紀錄的 HTML 標籤
-                listHTML += `
-                <div class="history-item">
-                    <div class="history-info">
-                        <div class="history-note">${data.note}</div>
-                        <div class="history-detail">${data.payer} 代墊｜靜如負擔 ¥${data.jingru} / 怡伸負擔 ¥${data.yishen}</div>
-                    </div>
-                    <div class="history-amount">¥ ${data.amount}</div>
+        onSnapshot(query(collection(db, "expenses"), orderBy("createdAt", "desc")), (snap) => {
+            let total = 0; let html = "";
+            snap.forEach(d => {
+                const e = d.data(); total += e.amount;
+                html += `<div class="section-card" style="padding:12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+                    <div><b>${e.item}</b><br><small style="color:#AAA">靜 ¥${e.jingru} | 怡 ¥${e.yishen}</small></div>
+                    <div style="font-weight:900; color:var(--wc-primary);">¥${e.amount}</div>
                 </div>`;
             });
-
-            // 更新畫面上的總額與列表
-            document.getElementById('total-jpy').innerText = `¥ ${totalAmount.toLocaleString()}`;
-            document.getElementById('total-twd').innerText = `約台幣 ${Math.round(totalAmount * 0.21).toLocaleString()} 元 (匯率約 0.21估算)`;
-            document.getElementById('expense-history-list').innerHTML = listHTML;
+            document.getElementById('total-val').innerText = `¥ ${total.toLocaleString()}`;
+            document.getElementById('twd-val').innerText = `約台幣 ${Math.round(total*0.21).toLocaleString()} 元`;
+            document.getElementById('exp-list').innerHTML = html;
         });
 
+        // --- 清單功能 ---
+        window.addTodo = async () => {
+            const task = document.getElementById('todo-input').value;
+            if(!task) return;
+            await addDoc(collection(db, "todos"), { task, done: false, createdAt: serverTimestamp() });
+            document.getElementById('todo-input').value = "";
+        };
+
+        window.toggleTodo = async (id, status) => { await updateDoc(doc(db, "todos", id), { done: !status }); };
+
+        onSnapshot(query(collection(db, "todos"), orderBy("createdAt")), (snap) => {
+            let html = "";
+            snap.forEach(d => {
+                const t = d.data();
+                html += `<div class="todo-item">
+                    <input type="checkbox" class="todo-checkbox" ${t.done?'checked':''} onclick="toggleTodo('${d.id}',${t.done})">
+                    <span class="${t.done?'done':''}">${t.task}</span>
+                </div>`;
+            });
+            document.getElementById('todo-list').innerHTML = html;
+        });
+
+        window.deleteItem = async (col, id) => { if(confirm("確定要刪除嗎？")) await deleteDoc(doc(db, col, id)); };
+
+        // 初始化日期列
+        const tripDates = ["5/29","5/30","5/31","6/01","6/02","6/03","6/04","6/05","6/06","6/07","6/08"];
+        const dateBar = document.getElementById('date-bar');
+        tripDates.forEach(d => {
+            const card = document.createElement('div');
+            card.className = `date-card ${d==="5/29"?'active':''}`;
+            card.innerHTML = `<div class="date">${d}</div>`;
+            card.onclick = () => {
+                document.querySelectorAll('.date-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                loadSchedule(d);
+            };
+            dateBar.appendChild(card);
+        });
+        loadSchedule("5/29");
     </script>
 
     <script>
-        const tripStart = new Date('2026-05-29');
-        const tripEnd = new Date('2026-06-08');
-
-        function generateDateCards() {
-            const scrollContainer = document.getElementById('dynamic-date-scroll');
-            let current = new Date(tripStart);
-            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-            while (current <= tripEnd) {
-                const dateStr = `${current.getMonth() + 1}/${String(current.getDate()).padStart(2, '0')}`;
-                const dayName = days[current.getDay()];
-                const isActive = (current.getTime() === tripStart.getTime()) ? 'active' : '';
-
-                const card = document.createElement('div');
-                card.className = `date-card ${isActive}`;
-                card.innerHTML = `<div class="day">${dayName}</div><div class="date">${dateStr}</div>`;
-                card.onclick = function() {
-                    document.querySelectorAll('.date-card').forEach(c => c.classList.remove('active'));
-                    card.classList.add('active');
-                };
-                scrollContainer.appendChild(card);
-                current.setDate(current.getDate() + 1);
-            }
-        }
-
         function calculateCountdown() {
-            const today = new Date();
-            const diffTime = tripStart - today;
-            const textElement = document.getElementById('countdown-timer');
-            if (diffTime <= 0) { textElement.innerText = "靜如與怡伸的小旅行，進行中！"; } 
-            else { const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); textElement.innerHTML = `距離啟程還有 <span style="font-size: 1.3rem; font-weight: 700; color:var(--wc-primary);">${diffDays}</span> 天`; }
+            const diff = new Date('2026-05-29') - new Date();
+            const el = document.getElementById('countdown-timer');
+            if(diff<=0) el.innerText = "靜如與怡伸的旅程進行中！";
+            else el.innerHTML = `距離啟程還有 <b>${Math.ceil(diff/(1000*60*60*24))}</b> 天`;
         }
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            const target = document.getElementById('page-' + tabId);
-            if(target) target.classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        function switchTab(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-'+id).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             event.currentTarget.classList.add('active');
-            window.scrollTo(0, 0);
+            window.scrollTo(0,0);
         }
-
-        window.onload = function() {
-            generateDateCards();
-            calculateCountdown();
-        };
+        calculateCountdown();
     </script>
 </body>
 </html>
