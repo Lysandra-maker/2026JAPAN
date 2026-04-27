@@ -19,53 +19,49 @@
         h1, h2, h3, .serif { font-family: 'Noto Serif TC', serif; font-weight: 600; }
         
         .hero { padding: 40px 20px; text-align: center; position: relative; }
+        .hero::before { content: ''; position: absolute; top: -30px; left: -10px; right: -10px; height: 180px; background: radial-gradient(circle at 30% 20%, var(--wc-secondary) 0%, rgba(255,255,255,0) 60%), radial-gradient(circle at 70% 30%, var(--wc-peach) 0%, rgba(255,255,255,0) 60%); opacity: 0.4; filter: blur(15px); z-index: -1; }
         .hero-title { font-size: 2.2rem; color: var(--text-dark); font-weight: 900; margin: 0; letter-spacing: 3px; position: relative; display: inline-block; }
-        .hero-title::after { content: ''; position: absolute; bottom: -8px; left: 5%; width: 90%; height: 6px; background: var(--wc-accent); border-radius: 30px 10px; opacity: 0.7; }
-        .countdown { display: inline-block; margin-top: 20px; padding: 8px 18px; background: white; border-radius: 20px 5px; border: 2px solid #FDF5E6; font-size: 0.85rem; color: var(--text-dark); box-shadow: 2px 2px 0 #F0E6D2; }
+        .hero-title::after { content: ''; position: absolute; bottom: -8px; left: 5%; width: 90%; height: 6px; background: var(--wc-accent); border-radius: 30px 10px; opacity: 0.6; }
+        .countdown { display: inline-block; margin-top: 15px; padding: 8px 18px; background: white; border-radius: 20px 5px; border: 2px solid #FDF5E6; font-size: 0.85rem; color: var(--text-dark); box-shadow: 2px 2px 0 #F0E6D2; }
 
         .container { padding: 0 15px; }
         .page { display: none; animation: fadeIn 0.4s ease; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 日期捲動區 */
         .date-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 5px 0 15px; margin-bottom: 10px; scrollbar-width: none; }
         .date-scroll::-webkit-scrollbar { display: none; }
         .date-card { min-width: 55px; text-align: center; padding: 10px 5px; border-radius: 12px 12px 12px 5px; background: rgba(255,255,255,0.7); border: 2px solid white; box-shadow: 2px 2px 6px rgba(0,0,0,0.02); cursor: pointer; }
         .date-card.active { background: var(--wc-primary); color: white; box-shadow: 3px 3px 10px rgba(138, 188, 166, 0.3); }
-        .date-card .day { font-size: 0.7rem; opacity: 0.8; }
         .date-card .date { font-size: 1.1rem; font-weight: 700; }
 
-        /* 內容卡片 */
         .section-card { background: rgba(255,255,255,0.8); border-radius: 15px 5px 15px 5px; padding: 20px; margin-bottom: 20px; border: 1px solid white; box-shadow: 2px 2px 10px rgba(0,0,0,0.02); }
         .section-title { font-size: 1.1rem; margin: 0 0 15px 0; border-left: 4px solid var(--wc-accent); padding-left: 10px; }
 
-        /* 時間軸 */
         .timeline { position: relative; padding-left: 20px; border-left: 3px solid rgba(226, 226, 226, 0.6); margin-left: 10px; }
         .time-item { position: relative; margin-bottom: 25px; background: white; padding: 15px; border-radius: 12px; border: 1px solid #FAF7F0; box-shadow: 2px 2px 5px rgba(0,0,0,0.01); }
         .time-item::before { content: ''; position: absolute; left: -30px; top: 15px; width: 14px; height: 14px; border-radius: 50%; background: var(--wc-primary); border: 3px solid var(--bg-paper); }
-        .time-item .delete-btn { position: absolute; right: 10px; top: 10px; font-size: 0.8rem; color: #CCC; cursor: pointer; }
+        .delete-btn { position: absolute; right: 10px; top: 10px; font-size: 0.8rem; color: #CCC; cursor: pointer; padding: 5px; }
 
-        /* 憑證票券 */
-        .boarding-pass { background: white; border-radius: 16px; margin-bottom: 25px; border: 2px solid rgba(173, 198, 217, 0.1); overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .boarding-pass { background: white; border-radius: 16px; margin-bottom: 25px; border: 2px solid rgba(173, 198, 217, 0.1); overflow: hidden; }
         .bp-header { background: var(--wc-secondary); color: white; padding: 10px 20px; font-size: 0.85rem; display: flex; justify-content: space-between; }
         .bp-body { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #EEE; }
         .bp-footer { padding: 12px 20px; background: #FBFCFD; display: flex; justify-content: space-between; font-size: 0.8rem; }
-        .drive-btn { display: block; width: 100%; text-align: center; padding: 12px 0; background: #F0F4F7; color: var(--wc-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 700; border-top: 1px solid #EEE; }
+        .drive-btn { display: block; width: 100%; text-align: center; padding: 12px 0; background: #F0F4F7; color: var(--wc-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 700; }
 
-        /* 輸入框與按鈕 */
         input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #FDF5E6; border-radius: 10px; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; }
-        .btn-add { background: var(--wc-primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+        .btn-add { background: var(--wc-primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; box-shadow: 2px 2px 0 #6C9E86; }
         
-        /* 導覽列 */
-        .bottom-nav { position: fixed; bottom: 15px; left: 5%; width: 90%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); z-index: 2000; border: 1px solid white; }
-        .nav-item { font-size: 0.7rem; color: var(--text-light); text-align: center; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
-        .nav-item.active { color: var(--wc-primary); font-weight: 700; transform: scale(1.1); }
-        .nav-icon { font-size: 1.3rem; }
+        .quick-split-btns { display: flex; gap: 8px; margin-bottom: 8px; }
+        .btn-mini { flex: 1; padding: 8px 5px; font-size: 0.75rem; background: white; border: 1px solid var(--wc-accent); border-radius: 8px; color: var(--text-dark); cursor: pointer; transition: 0.2s; }
+        .btn-mini:active { background: var(--wc-accent); color: white; }
 
-        /* 清單 */
+        .bottom-nav { position: fixed; bottom: 15px; left: 3%; width: 94%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); z-index: 2000; border: 1px solid white; }
+        .nav-item { font-size: 0.65rem; color: var(--text-light); text-align: center; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
+        .nav-item.active { color: var(--wc-primary); font-weight: 700; transform: scale(1.05); }
+        .nav-icon { font-size: 1.2rem; }
+
         .todo-item { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.9rem; }
-        .todo-checkbox { width: 22px; height: 22px; margin-right: 12px; accent-color: var(--wc-primary); }
         .done { text-decoration: line-through; color: #AAA; }
     </style>
 </head>
@@ -73,80 +69,37 @@
 
     <div class="hero">
         <h1 class="hero-title">初夏紀行</h1>
-        <div class="hero-subtitle" style="font-size: 0.8rem; color: var(--text-light); margin-top: 10px;">靜如 & 怡伸的日本手帳</div>
         <div class="countdown" id="countdown-timer">載入中...</div>
     </div>
 
     <div class="container">
         <div id="page-schedule" class="page active">
             <div class="date-scroll" id="date-bar"></div>
-            <div id="current-day-label" style="font-family: serif; font-size: 1.2rem; color: var(--wc-primary); margin-bottom: 15px; font-weight: 900;"></div>
-            
-            <div class="timeline" id="itinerary-list">
-                </div>
-
-            <div class="section-card" style="margin-top: 30px; background: rgba(255,255,255,0.5);">
-                <h3 class="section-title">新增今日行程</h3>
+            <div id="current-day-label" style="font-family: serif; font-size: 1.1rem; color: var(--wc-primary); margin-bottom: 15px; font-weight: 900; text-align: center;"></div>
+            <div class="timeline" id="itinerary-list"></div>
+            <div class="section-card" style="margin-top: 30px;">
+                <h3 class="section-title">新增行程</h3>
                 <input type="text" id="sched-time" placeholder="時間 (如 09:30)">
-                <input type="text" id="sched-title" placeholder="景點/活動名稱">
-                <select id="sched-type">
-                    <option value="spot">景點</option>
-                    <option value="food">美食</option>
-                    <option value="trans">交通</option>
-                    <option value="hotel">住宿</option>
-                </select>
-                <button class="btn-add" onclick="addSchedule()">加入時間軸</button>
+                <input type="text" id="sched-title" placeholder="地點/活動">
+                <button class="btn-add" onclick="addSchedule()">加入今日手帳</button>
             </div>
         </div>
 
         <div id="page-bookings" class="page">
             <h2 class="serif">雲端憑證庫</h2>
-            
-            <div style="font-size: 0.85rem; font-weight: 700; margin: 15px 0 10px 5px;">✈️ 航班資訊</div>
             <div class="boarding-pass">
-                <div class="bp-header"><span>5/29 共同去程</span><span>AirAsia D7 378</span></div>
+                <div class="bp-header"><span>5/29 去程</span><span>AirAsia D7 378</span></div>
                 <div class="bp-body">
                     <div><b>TPE</b><div style="font-size: 0.7rem;">台北 15:40</div></div>
                     <div style="font-size: 1.2rem; opacity: 0.3;">✈️</div>
                     <div><b>KIX</b><div style="font-size: 0.7rem;">大阪 19:30</div></div>
                 </div>
-                <a href="https://drive.google.com/drive/folders/1i7hREjsVEpPNngJXHAGFOxzHCfvIQeMu" target="_blank" class="drive-btn">📂 開啟電子機票 PDF</a>
-            </div>
-
-            <div class="boarding-pass">
-                <div class="bp-header" style="background: var(--wc-accent);"><span>6/03 怡伸回程</span><span>待確認</span></div>
-                <div class="bp-body">
-                    <div><b>KIX</b><div style="font-size: 0.7rem;">大阪</div></div>
-                    <div style="font-size: 1.2rem; opacity: 0.3;">✈️</div>
-                    <div><b>TPE</b><div style="font-size: 0.7rem;">台北</div></div>
-                </div>
-                <a href="https://drive.google.com/drive/folders/1i7hREjsVEpPNngJXHAGFOxzHCfvIQeMu" target="_blank" class="drive-btn">📂 查看回程憑證</a>
-            </div>
-
-            <div class="boarding-pass">
-                <div class="bp-header" style="background: #C98A6C;"><span>6/08 靜如回程</span><span>CI 155</span></div>
-                <div class="bp-body">
-                    <div><b>NGO</b><div style="font-size: 0.7rem;">名古屋 12:20</div></div>
-                    <div style="font-size: 1.2rem; opacity: 0.3;">✈️</div>
-                    <div><b>TPE</b><div style="font-size: 0.7rem;">台北 14:30</div></div>
-                </div>
-                <a href="https://drive.google.com/drive/folders/1i7hREjsVEpPNngJXHAGFOxzHCfvIQeMu" target="_blank" class="drive-btn">📂 開啟電子機票 PDF</a>
-            </div>
-
-            <div style="font-size: 0.85rem; font-weight: 700; margin: 25px 0 10px 5px;">🏨 住宿資訊</div>
-            <div class="section-card">
-                <h3 class="section-title">京都：樂天 STAY URBAN</h3>
-                <div style="font-size: 0.85rem; line-height: 1.6;">
-                    5/29 - 6/04 (6晚)<br>電話：+81 75-352-7725
-                </div>
-                <a href="https://drive.google.com/drive/folders/1i7hREjsVEpPNngJXHAGFOxzHCfvIQeMu" target="_blank" class="drive-btn" style="margin-top: 15px; border-radius: 8px; border: 1px solid #EEE;">📂 開啟訂房憑證</a>
+                <a href="#" class="drive-btn">📂 開啟電子機票</a>
             </div>
             <div class="section-card">
-                <h3 class="section-title">名古屋：庫樂竹高級飯店</h3>
-                <div style="font-size: 0.85rem; line-height: 1.6;">
-                    6/04 - 6/08 (4晚)<br>電話：+81 52-562-1211
-                </div>
-                <a href="https://drive.google.com/drive/folders/1i7hREjsVEpPNngJXHAGFOxzHCfvIQeMu" target="_blank" class="drive-btn" style="margin-top: 15px; border-radius: 8px; border: 1px solid #EEE;">📂 開啟訂房憑證</a>
+                <h3 class="section-title">樂天 STAY URBAN</h3>
+                <div style="font-size: 0.85rem;">5/29 - 6/04 京都</div>
+                <a href="#" class="drive-btn" style="margin-top:10px; border-radius:8px;">📂 訂房憑證</a>
             </div>
         </div>
 
@@ -155,16 +108,21 @@
             <div class="section-card" style="background: var(--text-dark); color: white;">
                 <div style="font-size: 0.8rem; opacity: 0.8;">總計支出</div>
                 <div id="total-val" style="font-size: 2rem; font-family: serif; font-weight: 900;">¥ 0</div>
-                <div id="twd-val" style="font-size: 0.85rem; opacity: 0.7;">約台幣 0 元</div>
             </div>
             <div class="section-card">
-                <input type="number" id="exp-amt" placeholder="金額 (¥)">
+                <h3 class="section-title">記入支出</h3>
+                <input type="number" id="exp-amt" placeholder="日圓金額 ¥">
+                <div class="quick-split-btns">
+                    <button class="btn-mini" onclick="quickSplit('half')">1/2 平分</button>
+                    <button class="btn-mini" onclick="quickSplit('j100')">靜如 100%</button>
+                    <button class="btn-mini" onclick="quickSplit('y100')">怡伸 100%</button>
+                </div>
                 <input type="text" id="exp-item" placeholder="項目說明">
                 <div style="display: flex; gap: 10px;">
-                    <input type="number" id="exp-j" placeholder="靜如付">
-                    <input type="number" id="exp-y" placeholder="怡伸付">
+                    <input type="number" id="exp-j" placeholder="靜如負擔">
+                    <input type="number" id="exp-y" placeholder="怡伸負擔">
                 </div>
-                <button class="btn-add" onclick="saveExpense()">記入帳本</button>
+                <button class="btn-add" onclick="saveExpense()">儲存紀錄</button>
             </div>
             <div id="exp-list"></div>
         </div>
@@ -173,10 +131,15 @@
             <h2 class="serif">行前準備</h2>
             <div class="section-card">
                 <div id="todo-list"></div>
-                <div style="margin-top: 20px; border-top: 1px dashed #EEE; padding-top: 15px;">
-                    <input type="text" id="todo-input" placeholder="新增待辦事項...">
-                    <button class="btn-add" style="background: var(--wc-accent);" onclick="addTodo()">加入清單</button>
-                </div>
+                <input type="text" id="todo-input" placeholder="新增待辦事項..."><button class="btn-add" onclick="addTodo()">加入清單</button>
+            </div>
+        </div>
+
+        <div id="page-shopping" class="page">
+            <h2 class="serif">購物願望清單</h2>
+            <div class="section-card">
+                <div id="shop-list"></div>
+                <input type="text" id="shop-input" placeholder="想買什麼呢？"><button class="btn-add" style="background: var(--wc-peach); box-shadow: 2px 2px 0 #D9B3A0;" onclick="addShop()">加入願望</button>
             </div>
         </div>
     </div>
@@ -184,8 +147,9 @@
     <div class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('schedule')"><span class="nav-icon">🗺️</span><span>行程</span></div>
         <div class="nav-item" onclick="switchTab('bookings')"><span class="nav-icon">🎟️</span><span>憑證</span></div>
-        <div class="nav-item" onclick="switchTab('expense')"><span class="nav-icon">🖊️</span><span>帳本</span></div>
+        <div class="nav-item" onclick="switchTab('expense')"><span class="nav-icon">🖋️</span><span>帳本</span></div>
         <div class="nav-item" onclick="switchTab('planning')"><span class="nav-icon">🎒</span><span>準備</span></div>
+        <div class="nav-item" onclick="switchTab('shopping')"><span class="nav-icon">🛍️</span><span>購物</span></div>
     </div>
 
     <script type="module">
@@ -200,102 +164,78 @@
             messagingSenderId: "400670967338",
             appId: "1:400670967338:web:bd11f6196d1aeaeb78a553"
         };
-
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        let selectedDate = "5/29";
 
-        let selectedDate = "5/29"; // 預設首日
-
-        // --- 行程功能 ---
+        // 綁定全局函數給 HTML 點擊
         window.addSchedule = async () => {
             const time = document.getElementById('sched-time').value;
             const title = document.getElementById('sched-title').value;
-            const type = document.getElementById('sched-type').value;
             if(!time || !title) return;
-            await addDoc(collection(db, "schedules"), { date: selectedDate, time, title, type, createdAt: serverTimestamp() });
+            await addDoc(collection(db, "schedules"), { date: selectedDate, time, title, createdAt: serverTimestamp() });
             document.getElementById('sched-time').value = ""; document.getElementById('sched-title').value = "";
         };
 
         window.loadSchedule = (date) => {
             selectedDate = date;
-            document.getElementById('current-day-label').innerText = `2026. ${date} 行程`;
+            document.getElementById('current-day-label').innerText = `2026. ${date} 行程手帳`;
             const qS = query(collection(db, "schedules"), where("date", "==", date), orderBy("time"));
             onSnapshot(qS, (snap) => {
                 let html = "";
-                snap.forEach(d => {
-                    const s = d.data();
-                    html += `<div class="time-item ${s.type}">
-                        <div class="delete-btn" onclick="deleteItem('schedules','${d.id}')">✕</div>
-                        <div class="time-label">${s.time}</div>
-                        <div class="time-title">${s.title}</div>
-                    </div>`;
-                });
-                document.getElementById('itinerary-list').innerHTML = html || "<p style='color:#AAA; font-size:0.8rem;'>今天還沒有安排行程呢...</p>";
+                snap.forEach(d => { html += `<div class="time-item"><div class="delete-btn" onclick="deleteItem('schedules','${d.id}')">✕</div><b>${d.data().time}</b> ${d.data().title}</div>`; });
+                document.getElementById('itinerary-list').innerHTML = html || "<p style='color:#AAA; text-align:center;'>尚未填寫行程</p>";
             });
         };
 
-        // --- 記帳功能 ---
+        window.quickSplit = (mode) => {
+            const amt = Number(document.getElementById('exp-amt').value);
+            if(!amt) return;
+            if(mode==='half'){ document.getElementById('exp-j').value = amt/2; document.getElementById('exp-y').value = amt/2; }
+            else if(mode==='j100'){ document.getElementById('exp-j').value = amt; document.getElementById('exp-y').value = 0; }
+            else if(mode==='y100'){ document.getElementById('exp-j').value = 0; document.getElementById('exp-y').value = amt; }
+        };
+
         window.saveExpense = async () => {
             const amt = document.getElementById('exp-amt').value;
             const item = document.getElementById('exp-item').value;
-            const j = document.getElementById('exp-j').value || 0;
-            const y = document.getElementById('exp-y').value || 0;
             if(!amt || !item) return;
-            await addDoc(collection(db, "expenses"), { amount: Number(amt), item, jingru: Number(j), yishen: Number(y), createdAt: serverTimestamp() });
+            await addDoc(collection(db, "expenses"), { amount: Number(amt), item, jingru: Number(document.getElementById('exp-j').value||0), yishen: Number(document.getElementById('exp-y').value||0), createdAt: serverTimestamp() });
             document.getElementById('exp-amt').value = ""; document.getElementById('exp-item').value = "";
-            document.getElementById('exp-j').value = ""; document.getElementById('exp-y').value = "";
         };
 
         onSnapshot(query(collection(db, "expenses"), orderBy("createdAt", "desc")), (snap) => {
             let total = 0; let html = "";
-            snap.forEach(d => {
-                const e = d.data(); total += e.amount;
-                html += `<div class="section-card" style="padding:12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
-                    <div><b>${e.item}</b><br><small style="color:#AAA">靜 ¥${e.jingru} | 怡 ¥${e.yishen}</small></div>
-                    <div style="font-weight:900; color:var(--wc-primary);">¥${e.amount}</div>
-                </div>`;
-            });
+            snap.forEach(d => { const e = d.data(); total += e.amount; html += `<div class="section-card" style="padding:10px; margin-bottom:8px; display:flex; justify-content:space-between;"><div><b>${e.item}</b><br><small>靜 ¥${e.jingru} | 怡 ¥${e.yishen}</small></div><div style="font-weight:900; color:var(--wc-primary);">¥${e.amount}</div></div>`; });
             document.getElementById('total-val').innerText = `¥ ${total.toLocaleString()}`;
-            document.getElementById('twd-val').innerText = `約台幣 ${Math.round(total*0.21).toLocaleString()} 元`;
             document.getElementById('exp-list').innerHTML = html;
         });
 
-        // --- 清單功能 ---
-        window.addTodo = async () => {
-            const task = document.getElementById('todo-input').value;
-            if(!task) return;
-            await addDoc(collection(db, "todos"), { task, done: false, createdAt: serverTimestamp() });
-            document.getElementById('todo-input').value = "";
-        };
+        window.addTodo = () => addListDoc("todos", "todo-input");
+        window.addShop = () => addListDoc("shopping", "shop-input");
+        async function addListDoc(colName, inputId){
+            const val = document.getElementById(inputId).value; if(!val) return;
+            await addDoc(collection(db, colName), { task: val, done: false, createdAt: serverTimestamp() });
+            document.getElementById(inputId).value = "";
+        }
 
-        window.toggleTodo = async (id, status) => { await updateDoc(doc(db, "todos", id), { done: !status }); };
+        window.toggleDone = async (col, id, status) => { await updateDoc(doc(db, col, id), { done: !status }); };
+        window.deleteItem = async (col, id) => { if(confirm("確定刪除？")) await deleteDoc(doc(db, col, id)); };
 
-        onSnapshot(query(collection(db, "todos"), orderBy("createdAt")), (snap) => {
-            let html = "";
-            snap.forEach(d => {
-                const t = d.data();
-                html += `<div class="todo-item">
-                    <input type="checkbox" class="todo-checkbox" ${t.done?'checked':''} onclick="toggleTodo('${d.id}',${t.done})">
-                    <span class="${t.done?'done':''}">${t.task}</span>
-                </div>`;
+        const syncList = (col, elId) => {
+            onSnapshot(query(collection(db, col), orderBy("createdAt")), (snap) => {
+                let html = "";
+                snap.forEach(d => { const t = d.data(); html += `<div class="todo-item"><input type="checkbox" ${t.done?'checked':''} onclick="toggleDone('${col}','${d.id}',${t.done})"><span class="${t.done?'done':''}">${t.task}</span><div style="margin-left:auto; color:#CCC;" onclick="deleteItem('${col}','${d.id}')">✕</div></div>`; });
+                document.getElementById(elId).innerHTML = html;
             });
-            document.getElementById('todo-list').innerHTML = html;
-        });
+        };
+        syncList("todos", "todo-list"); syncList("shopping", "shop-list");
 
-        window.deleteItem = async (col, id) => { if(confirm("確定要刪除嗎？")) await deleteDoc(doc(db, col, id)); };
-
-        // 初始化日期列
         const tripDates = ["5/29","5/30","5/31","6/01","6/02","6/03","6/04","6/05","6/06","6/07","6/08"];
         const dateBar = document.getElementById('date-bar');
         tripDates.forEach(d => {
-            const card = document.createElement('div');
-            card.className = `date-card ${d==="5/29"?'active':''}`;
-            card.innerHTML = `<div class="date">${d}</div>`;
-            card.onclick = () => {
-                document.querySelectorAll('.date-card').forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-                loadSchedule(d);
-            };
+            const card = document.createElement('div'); card.className = `date-card ${d==="5/29"?'active':''}`; card.innerHTML = `<div class="date">${d}</div>`;
+            card.onclick = () => { document.querySelectorAll('.date-card').forEach(c => c.classList.remove('active')); card.classList.add('active'); loadSchedule(d); };
             dateBar.appendChild(card);
         });
         loadSchedule("5/29");
@@ -305,16 +245,17 @@
         function calculateCountdown() {
             const diff = new Date('2026-05-29') - new Date();
             const el = document.getElementById('countdown-timer');
-            if(diff<=0) el.innerText = "靜如與怡伸的旅程進行中！";
-            else el.innerHTML = `距離啟程還有 <b>${Math.ceil(diff/(1000*60*60*24))}</b> 天`;
+            if(diff<=0) el.innerText = "旅程進行中！";
+            else el.innerHTML = `距離啟程 <b>${Math.ceil(diff/(1000*60*60*24))}</b> 天`;
         }
-        function switchTab(id) {
+        window.switchTab = function(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-'+id).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            const activeNav = Array.from(document.querySelectorAll('.nav-item')).find(n => n.getAttribute('onclick').includes(id));
+            if(activeNav) activeNav.classList.add('active');
             window.scrollTo(0,0);
-        }
+        };
         calculateCountdown();
     </script>
 </body>
