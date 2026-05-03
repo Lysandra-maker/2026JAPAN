@@ -35,11 +35,14 @@
         .section-card { background: rgba(255,255,255,0.8); border-radius: 15px 5px 15px 5px; padding: 20px; margin-bottom: 20px; border: 1px solid white; box-shadow: 2px 2px 10px rgba(0,0,0,0.02); }
         .section-title { font-size: 1.1rem; margin: 0 0 15px 0; border-left: 4px solid var(--wc-accent); padding-left: 10px; }
 
-        /* 時間軸 */
+        /* 時間軸與新增的天氣、導航按鈕樣式 */
         .timeline { position: relative; padding-left: 20px; border-left: 3px solid rgba(226, 226, 226, 0.6); margin-left: 10px; }
         .time-item { position: relative; margin-bottom: 25px; background: white; padding: 15px; border-radius: 12px; border: 1px solid #FAF7F0; box-shadow: 2px 2px 5px rgba(0,0,0,0.01); }
         .time-item::before { content: ''; position: absolute; left: -30px; top: 15px; width: 14px; height: 14px; border-radius: 50%; background: var(--wc-primary); border: 3px solid var(--bg-paper); }
         .delete-btn { position: absolute; right: 8px; top: 8px; font-size: 0.8rem; color: #CCC; cursor: pointer; padding: 4px; }
+        
+        .weather-btn { display: inline-block; background: white; border: 1px solid var(--wc-accent); padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; color: var(--text-dark); text-decoration: none; box-shadow: 2px 2px 0 #F0E6D2; margin-bottom: 20px; font-weight: 500; }
+        .nav-btn-mini { display: inline-block; margin-top: 8px; padding: 5px 10px; background: #F0F4F7; color: var(--wc-secondary); font-size: 0.75rem; border-radius: 8px; text-decoration: none; font-weight: 700; border: 1px solid #E1E8ED; }
 
         /* 憑證票券 */
         .boarding-pass { background: white; border-radius: 16px; margin-bottom: 25px; border: 2px solid rgba(173, 198, 217, 0.1); overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
@@ -76,18 +79,27 @@
     </div>
 
     <div class="container">
+        <!-- 1. 行程手帳 -->
         <div id="page-schedule" class="page active">
             <div class="date-scroll" id="date-bar"></div>
-            <div id="current-day-label" style="font-family: serif; font-size: 1.1rem; color: var(--wc-primary); margin-bottom: 15px; font-weight: 900; text-align: center;"></div>
+            <div id="current-day-label" style="font-family: serif; font-size: 1.1rem; color: var(--wc-primary); margin-bottom: 5px; font-weight: 900; text-align: center;"></div>
+            
+            <!-- 天氣任意門按鈕 -->
+            <div style="text-align: center;">
+                <a href="#" target="_blank" id="btn-weather" class="weather-btn" style="display: none;">⛅ 查詢當地天氣</a>
+            </div>
+
             <div class="timeline" id="itinerary-list"></div>
             <div class="section-card" style="margin-top: 30px;">
                 <h3 class="section-title">新增今日行程</h3>
                 <input type="text" id="sched-time" placeholder="時間 (如 09:30、早上、下午)">
                 <input type="text" id="sched-title" placeholder="景點/活動項目">
+                <input type="text" id="sched-location" placeholder="導航地點 (選填，如: 京都車站)">
                 <button class="btn-add" id="btn-add-schedule">加入手帳</button>
             </div>
         </div>
 
+        <!-- 2. 預訂憑證 -->
         <div id="page-bookings" class="page">
             <h2 class="serif">憑證庫</h2>
             
@@ -127,22 +139,28 @@
                 <h3 class="section-title">京都：樂天 STAY URBAN 四條寺町</h3>
                 <div style="font-size: 0.85rem;">5/29 - 6/04</div>
                 <div style="font-size: 0.85rem;">地址：Ebisunocho 530, 河原町, 京都, 日本, 600-8033 電話：+81753527725</div>
-                <a href="https://drive.google.com/file/d/1CEgwggAEbkeSjc2zoEWSz5ApKhIYJt0w/view?usp=drive_link" class="drive-btn" style="margin-top:10px; border-radius:8px;">📂 訂房確認信</a>
+                <a href="https://drive.google.com/file/d/1CEgwggAEbkeSjc2zoEWSz5ApKhIYJt0w/view?usp=drive_link" target="_blank" class="drive-btn" style="margin-top:10px; border-radius:8px;">📂 訂房確認信</a>
             </div>
             <div class="section-card">
                 <h3 class="section-title">名古屋：庫樂竹高級飯店 名站南</h3>
                 <div style="font-size: 0.85rem;">6/04 - 6/08</div>
                 <div style="font-size: 0.85rem;">地址：1-chōme-23-9 Meiekiminami, Nakamura Ward, Nagoya, 名古屋站, 名古屋, 日本, 450-0003 電話：+81525621211</div>
-                <a href="https://drive.google.com/file/d/1YWCPdLO3Tb3UfBiPie4IEhJgSLb6P97P/view?usp=drive_link" class="drive-btn" style="margin-top:10px; border-radius:8px;">📂 訂房確認信</a>
+                <a href="https://drive.google.com/file/d/1YWCPdLO3Tb3UfBiPie4IEhJgSLb6P97P/view?usp=drive_link" target="_blank" class="drive-btn" style="margin-top:10px; border-radius:8px;">📂 訂房確認信</a>
             </div>
         </div>
 
+        <!-- 3. 記帳帳本 -->
         <div id="page-expense" class="page">
             <h2 class="serif">旅行帳本</h2>
             <div class="section-card" style="background: var(--text-dark); color: white;">
                 <div style="font-size: 0.8rem; opacity: 0.8;">目前總支出概覽</div>
                 <div id="summary-jpy" style="font-size: 1.5rem; font-family: serif; font-weight: 900; margin-top:5px;">日圓 ¥ 0</div>
-                <div id="summary-twd" style="font-size: 1.2rem; font-family: serif; font-weight: 900; margin-bottom:5px;">台幣 $ 0</div>
+                <div id="summary-twd" style="font-size: 1.2rem; font-family: serif; font-weight: 900; margin-bottom:8px;">台幣 $ 0</div>
+                
+                <!-- 個人花費累計 (加入台幣追蹤) -->
+                <div id="individual-summary" style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 12px; border-top: 1px dashed rgba(255,255,255,0.3); padding-top: 10px; line-height: 1.5;">
+                    💁‍♀️ 靜如累計：¥ 0 / $ 0<br>🙋‍♂️ 怡伸累計：¥ 0 / $ 0
+                </div>
                 
                 <div class="settlement-box" id="settlement-result" style="color: var(--text-dark); font-weight: 700; font-size: 0.95rem;">
                     正在結算中...
@@ -175,6 +193,7 @@
             <div id="exp-list"></div>
         </div>
 
+        <!-- 4. 清單 -->
         <div id="page-planning" class="page">
             <h2 class="serif">準備與清單</h2>
             
@@ -199,6 +218,7 @@
         </div>
     </div>
 
+    <!-- 導覽列 -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('schedule')"><span class="nav-icon">🗺️</span><span>行程</span></div>
         <div class="nav-item" onclick="switchTab('bookings')"><span class="nav-icon">🎟️</span><span>憑證</span></div>
@@ -225,13 +245,13 @@
         window.deleteItem = async (col, id) => { if(confirm("確定刪除此紀錄嗎？")) await deleteDoc(doc(db, col, id)); };
         window.toggleStatus = async (col, id, s) => { await updateDoc(doc(db, col, id), { done: !s }); };
 
-        // --- 1. 行程 (包含模糊時間轉換法) ---
+        // --- 1. 行程 (包含模糊時間轉換法 & 導航) ---
         document.getElementById('btn-add-schedule').onclick = async () => {
             const timeInput = document.getElementById('sched-time').value;
             const title = document.getElementById('sched-title').value;
+            const loc = document.getElementById('sched-location').value; 
             if(!timeInput || !title) return;
 
-            // 隱形轉換：把國字轉成時間讓 Firebase 去排隊
             let sortTime = timeInput
                 .replace(/早上|上午/g, "08:00")
                 .replace(/中午/g, "12:00")
@@ -240,30 +260,47 @@
 
             await addDoc(collection(db, "schedules"), { 
                 date: selectedDate, 
-                time: sortTime,         // 給 Firebase 排序用的時間
-                displayTime: timeInput, // 畫面上顯示用的文字
+                time: sortTime, 
+                displayTime: timeInput, 
                 title, 
+                location: loc || "", 
                 createdAt: serverTimestamp() 
             });
-            document.getElementById('sched-time').value = ""; document.getElementById('sched-title').value = "";
+            document.getElementById('sched-time').value = ""; 
+            document.getElementById('sched-title').value = "";
+            document.getElementById('sched-location').value = "";
         };
 
         window.loadSchedule = (date) => {
             selectedDate = date;
             document.getElementById('current-day-label').innerText = `2026. ${date} 行程手帳`;
+            
+            const weatherBtn = document.getElementById('btn-weather');
+            weatherBtn.style.display = 'inline-block';
+            const isKyoto = ["5/29", "5/30", "5/31", "6/01", "6/02", "6/03"].includes(date);
+            if(isKyoto) {
+                weatherBtn.href = "https://tenki.jp/forecast/6/29/6110/26100/";
+                weatherBtn.innerText = "⛅ 京都當地天氣 (tenki.jp)";
+            } else {
+                weatherBtn.href = "https://tenki.jp/forecast/5/39/5110/23100/";
+                weatherBtn.innerText = "⛅ 名古屋天氣 (tenki.jp)";
+            }
+
             const qS = query(collection(db, "schedules"), where("date", "==", date), orderBy("time"));
             onSnapshot(qS, (snap) => {
                 let html = "";
                 snap.forEach(d => { 
                     const data = d.data();
-                    const showTime = data.displayTime || data.time; // 如果有 displayTime 就顯示，沒有就退回顯示 time
-                    html += `<div class="time-item"><div class="delete-btn" onclick="deleteItem('schedules','${d.id}')">✕</div><b>${showTime}</b> ${data.title}</div>`; 
+                    const showTime = data.displayTime || data.time; 
+                    const mapLink = data.location ? `<br><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.location)}" target="_blank" class="nav-btn-mini">📍導航至：${data.location}</a>` : '';
+                    
+                    html += `<div class="time-item"><div class="delete-btn" onclick="deleteItem('schedules','${d.id}')">✕</div><b>${showTime}</b> ${data.title} ${mapLink}</div>`; 
                 });
                 document.getElementById('itinerary-list').innerHTML = html || "<p style='color:#AAA; text-align:center; font-size:0.85rem;'>今天還沒有行程，去散散步吧！</p>";
             });
         };
 
-        // --- 2. 記帳 (加入叉叉刪除鈕) ---
+        // --- 2. 記帳 (加入累計顯示，包含日圓與台幣) ---
         document.getElementById('btn-quick-half').onclick = () => { const a = Number(document.getElementById('exp-amt').value); document.getElementById('exp-j').value = a/2; document.getElementById('exp-y').value = a/2; };
         document.getElementById('btn-quick-j100').onclick = () => { const a = Number(document.getElementById('exp-amt').value); document.getElementById('exp-j').value = a; document.getElementById('exp-y').value = 0; };
         document.getElementById('btn-quick-y100').onclick = () => { const a = Number(document.getElementById('exp-amt').value); document.getElementById('exp-j').value = 0; document.getElementById('exp-y').value = a; };
@@ -284,11 +321,24 @@
             let totalJPY = 0, totalTWD = 0;
             let jingruPaidForYishen = { JPY: 0, TWD: 0 };
             let yishenPaidForJingru = { JPY: 0, TWD: 0 };
+            
+            // 獨立計算個人的日圓與台幣累計花費
+            let jingruSpentJPY = 0, yishenSpentJPY = 0;
+            let jingruSpentTWD = 0, yishenSpentTWD = 0;
+            
             let listHTML = "";
 
             snap.forEach(d => {
                 const e = d.data();
-                if(e.currency === "JPY") totalJPY += e.amount; else totalTWD += e.amount;
+                if(e.currency === "JPY") {
+                    totalJPY += e.amount;
+                    jingruSpentJPY += e.jingru;
+                    yishenSpentJPY += e.yishen;
+                } else {
+                    totalTWD += e.amount;
+                    jingruSpentTWD += e.jingru;
+                    yishenSpentTWD += e.yishen;
+                }
 
                 if(e.payer === "靜如") {
                     if(e.currency === "JPY") jingruPaidForYishen.JPY += e.yishen; else jingruPaidForYishen.TWD += e.yishen;
@@ -297,7 +347,6 @@
                 }
 
                 const symbol = e.currency === "JPY" ? "¥" : "$";
-                // 這裡加入了右上角的 ✕ 刪除按鈕
                 listHTML += `<div class="section-card" style="padding:10px; margin-bottom:8px; display:flex; justify-content:space-between; position:relative;">
                     <div class="delete-btn" style="top:5px; right:5px;" onclick="deleteItem('expenses','${d.id}')">✕</div>
                     <div style="margin-right: 20px;"><b>${e.item}</b><br><small>${e.payer}墊｜靜${e.jingru} 怡${e.yishen}</small></div>
@@ -307,6 +356,10 @@
 
             document.getElementById('summary-jpy').innerText = `日圓 ¥ ${totalJPY.toLocaleString()}`;
             document.getElementById('summary-twd').innerText = `台幣 $ ${totalTWD.toLocaleString()}`;
+            
+            // 更新雙幣別的個人花費累計
+            document.getElementById('individual-summary').innerHTML = `💁‍♀️ 靜如累計：¥ ${jingruSpentJPY.toLocaleString()} / $ ${jingruSpentTWD.toLocaleString()}<br>🙋‍♂️ 怡伸累計：¥ ${yishenSpentJPY.toLocaleString()} / $ ${yishenSpentTWD.toLocaleString()}`;
+            
             document.getElementById('exp-list').innerHTML = listHTML;
 
             const resJ = jingruPaidForYishen.JPY - yishenPaidForJingru.JPY;
@@ -333,7 +386,7 @@
             document.getElementById("todo-list").innerHTML = html;
         });
 
-        // --- 4. 購物清單 (加入地點與 Checkbox) ---
+        // --- 4. 購物清單 ---
         document.getElementById("btn-add-shop").onclick = async () => {
             const val = document.getElementById("shop-input").value; 
             const loc = document.getElementById("shop-location").value;
