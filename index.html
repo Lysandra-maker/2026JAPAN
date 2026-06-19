@@ -26,7 +26,6 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 日期捲動 */
         .date-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 5px 0 15px; margin-bottom: 10px; scrollbar-width: none; }
         .date-scroll::-webkit-scrollbar { display: none; }
         .date-card { min-width: 55px; text-align: center; padding: 10px 5px; border-radius: 12px 12px 12px 5px; background: rgba(255,255,255,0.7); border: 2px solid white; box-shadow: 2px 2px 6px rgba(0,0,0,0.02); cursor: pointer; }
@@ -35,7 +34,6 @@
         .section-card { background: rgba(255,255,255,0.8); border-radius: 15px 5px 15px 5px; padding: 20px; margin-bottom: 20px; border: 1px solid white; box-shadow: 2px 2px 10px rgba(0,0,0,0.02); }
         .section-title { font-size: 1.1rem; margin: 0 0 15px 0; border-left: 4px solid var(--wc-accent); padding-left: 10px; }
 
-        /* 時間軸與新增的天氣、導航按鈕樣式 */
         .timeline { position: relative; padding-left: 20px; border-left: 3px solid rgba(226, 226, 226, 0.6); margin-left: 10px; }
         .time-item { position: relative; margin-bottom: 25px; background: white; padding: 15px; border-radius: 12px; border: 1px solid #FAF7F0; box-shadow: 2px 2px 5px rgba(0,0,0,0.01); }
         .time-item::before { content: ''; position: absolute; left: -30px; top: 15px; width: 14px; height: 14px; border-radius: 50%; background: var(--wc-primary); border: 3px solid var(--bg-paper); }
@@ -44,21 +42,18 @@
         .weather-btn { display: inline-block; background: white; border: 1px solid var(--wc-accent); padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; color: var(--text-dark); text-decoration: none; box-shadow: 2px 2px 0 #F0E6D2; margin-bottom: 20px; font-weight: 500; }
         .nav-btn-mini { display: inline-block; margin-top: 8px; padding: 5px 10px; background: #F0F4F7; color: var(--wc-secondary); font-size: 0.75rem; border-radius: 8px; text-decoration: none; font-weight: 700; border: 1px solid #E1E8ED; }
 
-        /* 憑證票券 */
         .boarding-pass { background: white; border-radius: 16px; margin-bottom: 25px; border: 2px solid rgba(173, 198, 217, 0.1); overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
         .bp-header { background: var(--wc-secondary); color: white; padding: 10px 20px; font-size: 0.85rem; display: flex; justify-content: space-between; }
         .bp-body { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #EEE; }
         .bp-footer { padding: 12px 20px; background: #FBFCFD; display: flex; justify-content: space-between; font-size: 0.8rem; }
         .drive-btn { display: block; width: 100%; text-align: center; padding: 12px 0; background: #F0F4F7; color: var(--wc-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 700; border-top: 1px solid #EEE; }
 
-        /* 輸入框與按鈕 */
         input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #FDF5E6; border-radius: 10px; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; }
         .btn-add { background: var(--wc-primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; }
         
         .quick-split-btns { display: flex; gap: 8px; margin-bottom: 8px; }
         .btn-mini { flex: 1; padding: 8px 5px; font-size: 0.75rem; background: white; border: 1px solid var(--wc-accent); border-radius: 8px; color: var(--text-dark); cursor: pointer; }
 
-        /* 導覽列 */
         .bottom-nav { position: fixed; bottom: 15px; left: 4%; width: 92%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); z-index: 2000; border: 1px solid white; }
         .nav-item { font-size: 0.65rem; color: var(--text-light); text-align: center; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
         .nav-item.active { color: var(--wc-primary); font-weight: 700; }
@@ -79,12 +74,10 @@
     </div>
 
     <div class="container">
-        <!-- 1. 行程手帳 -->
         <div id="page-schedule" class="page active">
             <div class="date-scroll" id="date-bar"></div>
             <div id="current-day-label" style="font-family: serif; font-size: 1.1rem; color: var(--wc-primary); margin-bottom: 5px; font-weight: 900; text-align: center;"></div>
             
-            <!-- 天氣任意門按鈕 -->
             <div style="text-align: center;">
                 <a href="#" target="_blank" id="btn-weather" class="weather-btn" style="display: none;">⛅ 查詢當地天氣</a>
             </div>
@@ -99,7 +92,6 @@
             </div>
         </div>
 
-        <!-- 2. 預訂憑證 -->
         <div id="page-bookings" class="page">
             <h2 class="serif">憑證庫</h2>
             
@@ -149,15 +141,13 @@
             </div>
         </div>
 
-        <!-- 3. 記帳帳本 -->
         <div id="page-expense" class="page">
             <h2 class="serif">旅行帳本</h2>
-            <div class="section-card" style="background: var(--text-dark); color: white;">
+            <div class="section-card" style="background: var(--text-dark); color: white; position: relative;">
                 <div style="font-size: 0.8rem; opacity: 0.8;">目前總支出概覽</div>
                 <div id="summary-jpy" style="font-size: 1.5rem; font-family: serif; font-weight: 900; margin-top:5px;">日圓 ¥ 0</div>
                 <div id="summary-twd" style="font-size: 1.2rem; font-family: serif; font-weight: 900; margin-bottom:8px;">台幣 $ 0</div>
                 
-                <!-- 個人花費累計 (加入台幣追蹤) -->
                 <div id="individual-summary" style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 12px; border-top: 1px dashed rgba(255,255,255,0.3); padding-top: 10px; line-height: 1.5;">
                     💁‍♀️ 靜如累計：¥ 0 / $ 0<br>🙋‍♂️ 怡伸累計：¥ 0 / $ 0
                 </div>
@@ -165,6 +155,8 @@
                 <div class="settlement-box" id="settlement-result" style="color: var(--text-dark); font-weight: 700; font-size: 0.95rem;">
                     正在結算中...
                 </div>
+
+                <button onclick="exportCSV()" style="width: 100%; margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; cursor: pointer; font-weight: 600;">📥 匯出明細 (Excel/CSV)</button>
             </div>
 
             <div class="section-card">
@@ -193,7 +185,6 @@
             <div id="exp-list"></div>
         </div>
 
-        <!-- 4. 清單 -->
         <div id="page-planning" class="page">
             <h2 class="serif">準備與清單</h2>
             
@@ -218,7 +209,6 @@
         </div>
     </div>
 
-    <!-- 導覽列 -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('schedule')"><span class="nav-icon">🗺️</span><span>行程</span></div>
         <div class="nav-item" onclick="switchTab('bookings')"><span class="nav-icon">🎟️</span><span>憑證</span></div>
@@ -245,7 +235,7 @@
         window.deleteItem = async (col, id) => { if(confirm("確定刪除此紀錄嗎？")) await deleteDoc(doc(db, col, id)); };
         window.toggleStatus = async (col, id, s) => { await updateDoc(doc(db, col, id), { done: !s }); };
 
-        // --- 1. 行程 (包含模糊時間轉換法 & 導航) ---
+        // --- 1. 行程 ---
         document.getElementById('btn-add-schedule').onclick = async () => {
             const timeInput = document.getElementById('sched-time').value;
             const title = document.getElementById('sched-title').value;
@@ -282,7 +272,7 @@
                 weatherBtn.href = "https://tenki.jp/forecast/6/29/6110/26100/";
                 weatherBtn.innerText = "⛅ 京都當地天氣 (tenki.jp)";
             } else {
-                weatherBtn.href = "https://tenki.jp/forecast/5/26/5110/23100/";
+                weatherBtn.href = "https://tenki.jp/forecast/5/39/5110/23100/";
                 weatherBtn.innerText = "⛅ 名古屋天氣 (tenki.jp)";
             }
 
@@ -292,7 +282,7 @@
                 snap.forEach(d => { 
                     const data = d.data();
                     const showTime = data.displayTime || data.time; 
-                    const mapLink = data.location ? `<br><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.location)}" target="_blank" class="nav-btn-mini">📍導航至：${data.location}</a>` : '';
+                    const mapLink = data.location ? `<br><a href="https://www.google.com/maps/search/?api=1&query=$${encodeURIComponent(data.location)}" target="_blank" class="nav-btn-mini">📍導航至：${data.location}</a>` : '';
                     
                     html += `<div class="time-item"><div class="delete-btn" onclick="deleteItem('schedules','${d.id}')">✕</div><b>${showTime}</b> ${data.title} ${mapLink}</div>`; 
                 });
@@ -300,7 +290,9 @@
             });
         };
 
-        // --- 2. 記帳 (加入累計顯示，包含日圓與台幣) ---
+        // --- 2. 記帳 (加入匯出資料準備) ---
+        let expenseDataForExport = []; // 用來裝載匯出資料的陣列
+
         document.getElementById('btn-quick-half').onclick = () => { const a = Number(document.getElementById('exp-amt').value); document.getElementById('exp-j').value = a/2; document.getElementById('exp-y').value = a/2; };
         document.getElementById('btn-quick-j100').onclick = () => { const a = Number(document.getElementById('exp-amt').value); document.getElementById('exp-j').value = a; document.getElementById('exp-y').value = 0; };
         document.getElementById('btn-quick-y100').onclick = () => { const a = Number(document.getElementById('exp-amt').value); document.getElementById('exp-j').value = 0; document.getElementById('exp-y').value = a; };
@@ -321,15 +313,16 @@
             let totalJPY = 0, totalTWD = 0;
             let jingruPaidForYishen = { JPY: 0, TWD: 0 };
             let yishenPaidForJingru = { JPY: 0, TWD: 0 };
-            
-            // 獨立計算個人的日圓與台幣累計花費
             let jingruSpentJPY = 0, yishenSpentJPY = 0;
             let jingruSpentTWD = 0, yishenSpentTWD = 0;
-            
             let listHTML = "";
+
+            expenseDataForExport = []; // 清空準備重新裝載最新資料
 
             snap.forEach(d => {
                 const e = d.data();
+                expenseDataForExport.push(e); // 將每筆資料放入匯出陣列
+
                 if(e.currency === "JPY") {
                     totalJPY += e.amount;
                     jingruSpentJPY += e.jingru;
@@ -356,10 +349,7 @@
 
             document.getElementById('summary-jpy').innerText = `日圓 ¥ ${totalJPY.toLocaleString()}`;
             document.getElementById('summary-twd').innerText = `台幣 $ ${totalTWD.toLocaleString()}`;
-            
-            // 更新雙幣別的個人花費累計
             document.getElementById('individual-summary').innerHTML = `💁‍♀️ 靜如累計：¥ ${jingruSpentJPY.toLocaleString()} / $ ${jingruSpentTWD.toLocaleString()}<br>🙋‍♂️ 怡伸累計：¥ ${yishenSpentJPY.toLocaleString()} / $ ${yishenSpentTWD.toLocaleString()}`;
-            
             document.getElementById('exp-list').innerHTML = listHTML;
 
             const resJ = jingruPaidForYishen.JPY - yishenPaidForJingru.JPY;
@@ -373,6 +363,38 @@
             }
             document.getElementById('settlement-result').innerText = settlementText;
         });
+
+        // 匯出 CSV 的全域函式
+        window.exportCSV = () => {
+            if (expenseDataForExport.length === 0) {
+                alert("目前沒有帳務紀錄可以匯出喔！");
+                return;
+            }
+
+            // 加入 BOM 確保 Excel 打開中文不會亂碼
+            let csvContent = "\uFEFF"; 
+            csvContent += "紀錄時間,項目說明,幣別,消費總金額,代墊人,靜如負擔,怡伸負擔\n";
+
+            expenseDataForExport.forEach(e => {
+                let dateStr = "未知時間";
+                if (e.createdAt) {
+                    const d = e.createdAt.toDate();
+                    dateStr = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+                }
+                const row = `"${dateStr}","${e.item}","${e.currency}",${e.amount},"${e.payer}",${e.jingru},${e.yishen}`;
+                csvContent += row + "\n";
+            });
+
+            // 建立下載連結並觸發下載
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", "靜如與怡伸_旅行記帳明細.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
 
         // --- 3. 待辦事項 ---
         document.getElementById("btn-add-todo").onclick = async () => {
